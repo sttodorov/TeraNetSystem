@@ -23,6 +23,9 @@
         public string Content { get; set; }
 
         [Required]
+        public string ImagePath { get; set; }
+
+        [Required]
         public DateTime DateCreated { get; set; }
 
         [Required]

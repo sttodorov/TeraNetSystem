@@ -24,7 +24,7 @@
         public virtual ApplicationUser Client { get; set; }
 
         [Required]
-        public int OfficeId { get; set; }
+        public string OfficeId { get; set; }
 
         public virtual Office Office { get; set; }
 

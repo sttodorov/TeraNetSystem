@@ -1,5 +1,6 @@
 ﻿namespace TeraNetSystem.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -10,10 +11,11 @@
         public Office()
             :base()
         {
+            this.Id = new Guid();
             this.Payments = new HashSet<Payment>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public int TownId { get; set; }
@@ -27,6 +29,9 @@
 
         [Required]
         public string Phone { get; set; }
+
+        [Required]
+        public string ImagePath { get; set; }
 
         public virtual ICollection<Payment> Payments
         {

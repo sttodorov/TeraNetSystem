@@ -19,6 +19,10 @@
 
         IDbSet<WorkTask> Tasks { get; set; }
 
+        IDbSet<Abonament> Abonaments { get; set; }
+
+        IDbSet<Request> Requests { get; set; }
+
         IDbSet<T> SetEntity<T>() where T : class;
 
         DbEntityEntry<T> Entry<T>(T entity) where T : class;

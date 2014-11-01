@@ -17,6 +17,10 @@
 
         IGenericRepository<WorkTask> Tasks { get; }
 
+        IGenericRepository<Abonament> Abonaments { get; }
+
+        IGenericRepository<Request> Requests { get; }
+
         void SaveChanges();
     }
 }

@@ -27,6 +27,10 @@
 
         public IDbSet<Payment> Payments { get; set; }
 
+        public IDbSet<Abonament> Abonaments { get; set; }
+
+        public IDbSet<Request> Requests { get; set; }
+
 
         public IDbSet<T> SetEntity<T>() where T : class
         {

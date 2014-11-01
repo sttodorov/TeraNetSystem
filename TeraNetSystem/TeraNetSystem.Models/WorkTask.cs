@@ -7,10 +7,11 @@
     {
         public WorkTask()
         {
+            this.Id = new Guid();
             this.DateCreated = DateTime.Now;
             this.Compleated = false;
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MinLength(5)]

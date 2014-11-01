@@ -72,6 +72,22 @@ namespace TeraNetSystem.Data
             }
         }
 
+        public IGenericRepository<Abonament> Abonaments
+        {
+            get
+            {
+                return this.GetRepository<Abonament>();
+            }
+        }
+
+        public IGenericRepository<Request> Requests
+        {
+            get
+            {
+                return this.GetRepository<Request>();
+            }
+        }
+
         public void SaveChanges()
         {
             this.context.SaveChanges();
