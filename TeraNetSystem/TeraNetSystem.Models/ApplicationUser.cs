@@ -33,6 +33,8 @@
 
         public virtual Town Town { get; set; }
 
+        [MinLength(5)]
+        [MaxLength(20)]
         public string ContractNumber { get; set; }
 
         [Required]

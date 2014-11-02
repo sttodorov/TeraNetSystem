@@ -14,7 +14,7 @@ using TeraNetSystem.Models;
 namespace TeraNetSystem.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationUserManager _userManager;
 
@@ -143,6 +143,9 @@ namespace TeraNetSystem.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.TownId = new SelectList(this.Data.Towns.All().ToList(), "Id", "TownName");
+            
+
             return View();
         }
 
@@ -155,7 +158,18 @@ namespace TeraNetSystem.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                { 
+                    UserName =model.Email, 
+                    Email = model.Email,  
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.Phone,
+                    TownId = model.TownId,
+                    Address = model.Address ,
+                    ContractNumber = model.ContractNumber
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

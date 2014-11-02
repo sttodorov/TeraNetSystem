@@ -42,7 +42,7 @@ video {
   display: inline-block;
 }
 
-audio:not([controls]) {
+audio:not([a]) {
   display: none;
   height: 0;
 }
