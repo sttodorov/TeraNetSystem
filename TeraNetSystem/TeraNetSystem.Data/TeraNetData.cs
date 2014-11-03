@@ -72,11 +72,11 @@ namespace TeraNetSystem.Data
             }
         }
 
-        public IGenericRepository<Abonament> Abonaments
+        public IGenericRepository<Subscription> Subscriptions
         {
             get
             {
-                return this.GetRepository<Abonament>();
+                return this.GetRepository<Subscription>();
             }
         }
 

@@ -13,9 +13,9 @@
         public Guid Id { get; set; }
 
         [Required]
-        public int AbonamentId { get; set; }
+        public int SubscriptionId { get; set; }
 
-        public virtual Abonament Abonament { get; set; }
+        public virtual Subscription Subscription { get; set; }
 
         [Required]
         public int TownId { get; set; }

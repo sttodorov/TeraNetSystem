@@ -19,7 +19,7 @@
 
         IDbSet<WorkTask> Tasks { get; set; }
 
-        IDbSet<Abonament> Abonaments { get; set; }
+        IDbSet<Subscription> Subscriptions { get; set; }
 
         IDbSet<Request> Requests { get; set; }
 

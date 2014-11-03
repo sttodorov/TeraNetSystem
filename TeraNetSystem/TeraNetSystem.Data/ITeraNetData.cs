@@ -17,7 +17,7 @@
 
         IGenericRepository<WorkTask> Tasks { get; }
 
-        IGenericRepository<Abonament> Abonaments { get; }
+        IGenericRepository<Subscription> Subscriptions { get; }
 
         IGenericRepository<Request> Requests { get; }
 

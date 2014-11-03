@@ -1,5 +1,6 @@
 namespace TeraNetSystem.Data.Migrations
 {
+    
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,13 +11,13 @@ namespace TeraNetSystem.Data.Migrations
 
     using TeraNetSystem.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TeraNetContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TeraNetSystem.Data.TeraNetContext>
     {
         private const string ADMIN_ROLE = "Admin";
         private const string OFFICE_ROLE = "OfficeMan";
         private const string NETWORK_ROLE = "NetworkMan";
-
         private const string DEFAULT_SEED_PASSWORD = "123456";
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -31,9 +32,9 @@ namespace TeraNetSystem.Data.Migrations
                 context.Towns.Add(new Town() { TownName = "Plovdiv" });
                 context.SaveChanges();
             }
-            if(!context.Abonaments.Any())
+            if (!context.Subscriptions.Any())
             {
-                context.Abonaments.Add(new Abonament() { AbonamentName = "Default", MB = 50, Price = 20.00m, Description = "Default abonament. With 50Mb download speed and #0Mb upload speed! Unlimeted usage!" });
+                context.Subscriptions.Add(new Subscription() { SubscriptionName = "Default", MB = 50, Price = 20.00m, Description = "Default Subscription. With 50Mb download speed and #0Mb upload speed! Unlimeted usage!" });
             }
 
             if (!context.Roles.Any())
@@ -52,17 +53,17 @@ namespace TeraNetSystem.Data.Migrations
                 var userManager = new UserManager<ApplicationUser>(userStore);
 
                 var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
-                var defaultAbonament = context.Abonaments.FirstOrDefault(a => a.AbonamentName == "Default");
+                var defaultSubscription = context.Subscriptions.FirstOrDefault(a => a.SubscriptionName == "Default");
 
-                var administartor = new ApplicationUser() 
-                { 
-                    UserName = "admin@teranet.com", 
-                    Email = "admin@teranet.com",  
+                var administartor = new ApplicationUser()
+                {
+                    UserName = "admin@teranet.com",
+                    Email = "admin@teranet.com",
                     FirstName = ADMIN_ROLE,
                     LastName = ADMIN_ROLE,
                     Town = sofiaTownFromDb,
                     Address = "Vitosha str. 18",
-                    Abonament = defaultAbonament
+                    Subscription = defaultSubscription
                 };
                 userManager.Create(administartor, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(administartor.Id, ADMIN_ROLE);
@@ -75,7 +76,7 @@ namespace TeraNetSystem.Data.Migrations
                     LastName = OFFICE_ROLE,
                     Town = sofiaTownFromDb,
                     Address = "Vitosha str. 18",
-                    Abonament = defaultAbonament
+                    Subscription = defaultSubscription
                 };
                 userManager.Create(officeMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(officeMan.Id, OFFICE_ROLE);
@@ -88,11 +89,12 @@ namespace TeraNetSystem.Data.Migrations
                     LastName = NETWORK_ROLE,
                     Town = sofiaTownFromDb,
                     Address = "Vitosha str. 18",
-                    Abonament = defaultAbonament
+                    Subscription = defaultSubscription
                 };
                 userManager.Create(networkMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(networkMan.Id, NETWORK_ROLE);
             }
         }
+
     }
 }

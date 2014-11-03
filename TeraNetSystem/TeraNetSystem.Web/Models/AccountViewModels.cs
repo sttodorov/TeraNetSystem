@@ -109,8 +109,8 @@ namespace TeraNetSystem.Web.Models
         public string Phone { get; set; }
 
         [Required]
-        [Display(Name = "Abonament")]
-        public int AbonamentId { get; set; }
+        [Display(Name = "Subscription")]
+        public int SubscriptionId { get; set; }
     }
 
     public class ResetPasswordViewModel

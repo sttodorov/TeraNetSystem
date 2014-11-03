@@ -144,7 +144,7 @@ namespace TeraNetSystem.Web.Controllers
         public ActionResult Register()
         {
             ViewBag.TownId = new SelectList(this.Data.Towns.All().ToList(), "Id", "TownName");
-            ViewBag.AbonamentId = new SelectList(this.Data.Abonaments.All().ToList(), "Id", "AbonamentName");
+            ViewBag.SubscriptionId = new SelectList(this.Data.Subscriptions.All().ToList(), "Id", "SubscriptionName");
             return View();
         }
 
@@ -167,7 +167,7 @@ namespace TeraNetSystem.Web.Controllers
                     TownId = model.TownId,
                     Address = model.Address ,
                     ContractNumber = model.ContractNumber,
-                    AbonamentId = model.AbonamentId
+                    SubscriptionId = model.SubscriptionId
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

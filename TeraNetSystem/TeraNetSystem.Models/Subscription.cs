@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Abonament
+    public class Subscription
     {
         private ICollection<ApplicationUser> users;
 
-        public Abonament()
+        public Subscription()
         {
             this.Users = new HashSet<ApplicationUser>();
         }
@@ -17,7 +17,7 @@
         [Required]
         [MinLength(3)]
         [MaxLength(20)]
-        public string AbonamentName { get; set; }
+        public string SubscriptionName { get; set; }
 
         [Required]
         public int MB { get; set; }
