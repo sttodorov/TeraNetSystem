@@ -4,38 +4,107 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/preload.css")
+    @Styles.Render("~/Content/css/bootstrap.css")
+    @Styles.Render("~/Content/css/font-awesome.min.css")
+    @Styles.Render("~/Content/css/animate.min.css")
+    @Styles.Render("~/Content/css/slidebars.css")
+    @Styles.Render("~/Content/css/lightbox.css")
+    @Styles.Render("~/Content/css/jquery.bxslider.css")
+    @Styles.Render("~/Content/css/syntaxhighlighter/shCore.css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/Content/css/style-blue.css")
+    @Styles.Render("~/Content/css/width-full.css")
+    @Styles.Render("~/Content/css/buttons.css")
+
+    @Styles.Render("~/Content/css/Site.css")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header id="header-full-top" class="hidden-xs header-full">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="header-full-title">
+                <img src="~/Content/images/TeraNetLogo.png" alt="TeraNetLogo" class="animated fadeInRight" id="logo"/>
             </div>
-            <div class="navbar-collapse collapse">
+            <nav class="top-nav">
+                <ul class="top-nav-social hidden-sm">
+                    <li><a href="#" class="animated fadeIn facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#" class="animated fadeIn linkedin"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+
+                <div class="dropdown animated fadeInDown">
+                    @*<i class="fa fa-user"></i>*@
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                </div> 
+            </nav>
+        </div>
+    </header>
+    <nav class="navbar navbar-static-top navbar-default navbar-header-full" role="navigation" id="header">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Services", "All", "Services")</li>
+                    <li>@Html.ActionLink("Contact", "Offices", "Contacts")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
+            </div><!-- navbar-collapse -->
+        </div><!-- container -->
+    </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <aside id="footer-widgets">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="footer-widget-title">Sitemap</h3>
+                    <ul class="list-unstyled three_cols">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Services", "All", "Services")</li>
+                        <li>@Html.ActionLink("Contact", "Offices", "Contacts")</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-widget">
+                        <h3 class="footer-widget-title">Recent News</h3>
+                        <div class="media">
+                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m2.jpg" width="75" height="75" alt="image"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">Lorem ipsum Duis quis occaecat minim lorem ipsum tempor officia labor</a></h4>
+                                <small>August 18, 2013</small>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m11.jpg" width="75" height="75" alt="image"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">Lorem ipsum dolor excepteur sunt in lorem ipsum cillum tempor</a></h4>
+                                <small>September 14, 2013</small>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m4.jpg" width="75" height="75" alt="image"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">Lorem ipsum Dolor cupidatat minim adipisicing et fugiat</a></h4>
+                                <small>October 9, 2013</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="footer-widget-title">On Connection Probles</h3>
+                    <ul class="list-unstyled three_cols">
+                        <li>Call Center</li>
+                        <li>+359 889 888 999</li>
+                    </ul>
+                </div>
+            </div> <!-- row -->
+            
+        </div> <!-- container -->
+    </aside>
+    <footer id="footer">
+        <p>Powered by: St. Todorov | Desgin: Artificial Reason, inc. © 2014 </p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
