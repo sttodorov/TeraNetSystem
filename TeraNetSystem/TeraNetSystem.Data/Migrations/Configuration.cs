@@ -31,6 +31,10 @@ namespace TeraNetSystem.Data.Migrations
                 context.Towns.Add(new Town() { TownName = "Plovdiv" });
                 context.SaveChanges();
             }
+            if(!context.Abonaments.Any())
+            {
+                context.Abonaments.Add(new Abonament() { AbonamentName = "Default", MB = 50, Price = 20.00m, Description = "Default abonament. With 50Mb download speed and #0Mb upload speed! Unlimeted usage!" });
+            }
 
             if (!context.Roles.Any())
             {
@@ -48,6 +52,7 @@ namespace TeraNetSystem.Data.Migrations
                 var userManager = new UserManager<ApplicationUser>(userStore);
 
                 var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
+                var defaultAbonament = context.Abonaments.FirstOrDefault(a => a.AbonamentName == "Default");
 
                 var administartor = new ApplicationUser() 
                 { 
@@ -56,7 +61,8 @@ namespace TeraNetSystem.Data.Migrations
                     FirstName = ADMIN_ROLE,
                     LastName = ADMIN_ROLE,
                     Town = sofiaTownFromDb,
-                    Address = "Vitosha str. 18" 
+                    Address = "Vitosha str. 18",
+                    Abonament = defaultAbonament
                 };
                 userManager.Create(administartor, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(administartor.Id, ADMIN_ROLE);
@@ -68,7 +74,8 @@ namespace TeraNetSystem.Data.Migrations
                     FirstName = OFFICE_ROLE,
                     LastName = OFFICE_ROLE,
                     Town = sofiaTownFromDb,
-                    Address = "Vitosha str. 18"
+                    Address = "Vitosha str. 18",
+                    Abonament = defaultAbonament
                 };
                 userManager.Create(officeMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(officeMan.Id, OFFICE_ROLE);
@@ -80,7 +87,8 @@ namespace TeraNetSystem.Data.Migrations
                     FirstName = NETWORK_ROLE,
                     LastName = NETWORK_ROLE,
                     Town = sofiaTownFromDb,
-                    Address = "Vitosha str. 18"
+                    Address = "Vitosha str. 18",
+                    Abonament = defaultAbonament
                 };
                 userManager.Create(networkMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(networkMan.Id, NETWORK_ROLE);

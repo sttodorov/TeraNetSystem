@@ -42,6 +42,11 @@
         [MaxLength(50)]
         public string Address { get; set; }
 
+        [Required]
+        public int AbonamentId { get; set; }
+
+        public virtual Abonament Abonament { get; set; }
+
         public virtual ICollection<Payment> Payments
         {
             get
