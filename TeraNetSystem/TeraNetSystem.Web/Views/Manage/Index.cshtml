@@ -1,5 +1,5 @@
-﻿@model TeraNetSystem.Web.Models.IndexViewModel
-<h2>@ViewBag.User.UserName</h2>
+﻿@model TeraNetSystem.Web.Models.ApplicationUserViewModel
+<h2>@Model.UserName</h2>
 
 <section>
     <div class="panel panel-primary">
@@ -21,26 +21,26 @@
                 </tr>
                 <tr>
                     <th>Fullname</th>
-                    <td>@ViewBag.User.FirstName @ViewBag.User.LastName</td>
+                    <td>@Model.FullName</td>
                 </tr>
                 <tr>
                     <th>Town</th>
-                    <td>@ViewBag.User.Town.TownName</td>
+                    <td>@Model.TownName</td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>@ViewBag.User.Address</td>
+                    <td>@Model.Address</td>
                 </tr>
                 <tr>
                     <th>Subscription plan</th>
-                    <td>@ViewBag.User.Subscription.SubscriptionName</td>  @*TODO: Link to subscription plan*@
+                    <td>@Model.SubscriptionPlan</td>  @*TODO: Link to subscription plan*@
                 </tr>
                 <tr>
                     <th>Contract number</th>
                     <td>
-                        @if (ViewBag.User.ContractNumber != null)
+                        @if (@Model.ContractNumber != null)
                         {
-                            @ViewBag.User.ContractNumber
+                            @Model.ContractNumber
                         }
                         else
                         {
@@ -52,9 +52,9 @@
                 <tr>
                     <th>Phone Number</th>
                     <td>
-                        @if (ViewBag.User.PhoneNumber != null)
+                        @if (@Model.PhoneNumber != null)
                         {
-                            @ViewBag.User.PhoneNumber
+                            @Model.PhoneNumber
                         }
                         else
                         {
@@ -65,9 +65,9 @@
                 <tr>
                     <th>Email</th>
                     <td>
-                        @if (ViewBag.User.Email != null)
+                        @if (@Model.Email != null)
                         {
-                            @ViewBag.User.Email
+                            @Model.Email
                         }
                         else
                         {
@@ -77,7 +77,7 @@
                 </tr>
                 <tr>
                     <th>Member Since</th>
-                    <td>@ViewBag.User.DateRegistered</td>
+                    <td>@String.Format("{0} {1} {2}", Model.RegisteredFrom.Day, (TeraNetSystem.Models.Month)Model.RegisteredFrom.Month, Model.RegisteredFrom.Year) </td>
                 </tr>
             </tbody>
         </table>

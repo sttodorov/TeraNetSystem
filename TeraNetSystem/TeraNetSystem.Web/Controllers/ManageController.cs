@@ -49,23 +49,18 @@ namespace TeraNetSystem.Web.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId()),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId()),
-                Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
-            };
+            //var model = new ApplicationUserViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId()),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId()),
+            //    Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+            //};
             var userId = this.User.Identity.GetUserId();
-            var currentUser = this.Data.Users.All().FirstOrDefault(u => u.Id == userId);
+            var currentUser = this.Data.Users.All().Select(ApplicationUserViewModel.FromUser).FirstOrDefault(u => u.Id == userId);
             
-            if(currentUser != null)
-            {
-                ViewBag.User = currentUser; 
-
-            }
-            return View(model);
+            return View(currentUser);
         }
 
         //
