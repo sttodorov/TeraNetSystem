@@ -4,6 +4,11 @@ using TeraNetSystem.Models;
 
 namespace TeraNetSystem.Web.Models
 {
+    public class ProfileViewModel
+    {
+
+    }
+    
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

@@ -7,6 +7,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System.Collections.Generic;
+    using System;
 
     public class ApplicationUser : IdentityUser
     {
@@ -16,6 +17,7 @@
             :base()
         {
             this.Payments = new HashSet<Payment>();
+            this.DateRegistered = DateTime.Now;
         }
 
         [Required]
@@ -27,6 +29,9 @@
         [MinLength(3)]
         [MaxLength(20)]
         public string LastName { get; set; }
+        
+        [Required]
+        public DateTime DateRegistered { get; set; }
 
         [Required]
         public int TownId { get; set; }

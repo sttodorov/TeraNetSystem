@@ -25,18 +25,15 @@
     <header id="header-full-top" class="hidden-xs header-full">
         <div class="container">
             <div class="header-full-title">
-                <img src="~/Content/images/TeraNetLogo.png" alt="TeraNetLogo" class="animated fadeInRight" id="logo"/>
+                <img src="~/Content/images/TeraNetLogo.png" alt="TeraNetLogo"  id="logo"/>
             </div>
             <nav class="top-nav">
                 <ul class="top-nav-social hidden-sm">
-                    <li><a href="#" class="animated fadeIn facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.facebook.com/TeraNet2007" class="animated fadeIn facebook"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#" class="animated fadeIn linkedin"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
-
-                <div class="dropdown animated fadeInDown">
-                    @*<i class="fa fa-user"></i>*@
-                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                </div> 
+                @Html.Partial("_LoginPartial")
+                
             </nav>
         </div>
     </header>

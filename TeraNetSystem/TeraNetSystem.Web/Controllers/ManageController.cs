@@ -12,7 +12,7 @@ using TeraNetSystem.Models;
 namespace TeraNetSystem.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         public ManageController()
         {
@@ -57,6 +57,14 @@ namespace TeraNetSystem.Web.Controllers
                 Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
             };
+            var userId = this.User.Identity.GetUserId();
+            var currentUser = this.Data.Users.All().FirstOrDefault(u => u.Id == userId);
+            
+            if(currentUser != null)
+            {
+                ViewBag.User = currentUser; 
+
+            }
             return View(model);
         }
 
