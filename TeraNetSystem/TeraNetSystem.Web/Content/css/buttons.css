@@ -354,20 +354,20 @@ button.button:disabled {
 
 /* line 195, ../scss/partials/_buttons.scss */
 .button-circle {
-  -webkit-border-radius: 240px;
-  -moz-border-radius: 240px;
-  -ms-border-radius: 240px;
-  -o-border-radius: 240px;
-  border-radius: 240px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
   -webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.2);
-  width: 120px;
-  line-height: 120px;
-  height: 120px;
+  width: 30px;
+  line-height: 30px;
+  height: 30px;
   padding: 0px;
-  border-width: 4px;
-  font-size: 18px;
+  border-width: 2px;
+  font-size: 12px;
 }
 
 /* line 229, ../scss/partials/_buttons.scss */

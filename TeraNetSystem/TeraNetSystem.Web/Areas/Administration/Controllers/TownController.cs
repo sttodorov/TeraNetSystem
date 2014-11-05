@@ -12,6 +12,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
     public class TownController : BaseController
     {
+        private const int PageSize = 3;
 
         // GET: Administration/Town
         public ActionResult Index()
@@ -20,9 +21,18 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListTowns()
+        public ActionResult ListTowns(int? id)
         {
-            var towns = this.Data.Towns.All().Select(TownViewModel.FromTown).ToList();
+            int pageNumber = id.GetValueOrDefault(1);
+
+            var towns = this.Data.Towns.All()
+                            .OrderBy(x => x.Id)
+                            .Skip((pageNumber - 1) * PageSize)
+                            .Take(PageSize)
+                            .Select(TownViewModel.FromTown)
+                            .ToList();
+
+            ViewBag.Pages = Math.Ceiling((double)this.Data.Towns.All().Count() / PageSize);
             return View(towns);
         }
 
@@ -115,7 +125,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
             townToBeEdiited.TownName = edditedTown.TownName;
             this.Data.SaveChanges();
 
-            return RedirectToAction("ListTowns");           
+            return RedirectToAction("ListTowns");
         }
 
     }

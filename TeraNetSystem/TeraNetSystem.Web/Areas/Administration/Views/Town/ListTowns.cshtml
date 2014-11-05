@@ -6,7 +6,10 @@
 <div class="admin-panel">
 
     <h2>@ViewBag.Title</h2>
-
+    @for (int i = 1; i <= ViewBag.Pages; i++)
+    {
+        <a class="button button-flat button-circle" href="@Url.Action("ListTowns", new { id = i })">@i</a>
+    }
     <table class="table table-hover">
         <thead>
             <tr>
@@ -46,5 +49,5 @@
         </tbody>
     </table>
     <a href="@Url.Action("CreatePage", "Town")" class="button button-block button-rounded button-primary button-large">Add town</a>
-
+    
 </div>
