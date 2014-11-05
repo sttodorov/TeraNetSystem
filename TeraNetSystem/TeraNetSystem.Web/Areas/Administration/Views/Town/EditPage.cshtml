@@ -1,0 +1,23 @@
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.TownViewModel
+
+@{
+    ViewBag.Title = "Edit town";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        @Html.Partial("TownPartial")
+    </div>
+
+    <div class="form-actions no-color row">
+        <button class="button button-rounded button-flat-primary" type="submit">
+            Apply
+        </button>
+        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListTowns", "Town")">
+            Cancel
+        </a>
+    </div>
+}
+
+

@@ -55,3 +55,8 @@ fieldset[disabled] .controls > select {
   cursor: not-allowed;
   background-color: #eeeeee;
 }
+
+.admin-panel {
+    margin-top: 100px;
+    margin-bottom: 160px;
+}

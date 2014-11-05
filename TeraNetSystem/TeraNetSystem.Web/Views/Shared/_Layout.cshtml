@@ -44,6 +44,11 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Services", "All", "Services")</li>
                     <li>@Html.ActionLink("Contact", "Offices", "Contacts")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Towns", "ListTowns", "Administration/Town")</li>
+                        <li>@Html.ActionLink("Offices", "GetAll", "Office")</li>
+                    }
                 </ul>
             </div><!-- navbar-collapse -->
         </div><!-- container -->

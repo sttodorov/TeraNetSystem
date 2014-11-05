@@ -1,0 +1,31 @@
+﻿@model string
+@{
+    ViewBag.Title = "Add town";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Town", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="input-group login-input">
+        <label>Town name</label>
+        <br />
+        @Html.TextBox("newTownName")
+    </div>
+    @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+
+    <br>
+
+    <button type="submit" class="button button-rounded button-flat-primary">
+        <i class="glyphicon glyphicon-upload">
+            Add
+        </i>
+    </button>
+
+    <div class="clearfix"></div>
+}
+
