@@ -1,6 +1,6 @@
 namespace TeraNetSystem.Data.Migrations
 {
-    
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -28,7 +28,7 @@ namespace TeraNetSystem.Data.Migrations
         {
             if (!context.Towns.Any())
             {
-                context.Towns.Add(new Town() { TownName = "Sofia" });
+                context.Towns.Add(new Town() { TownName = "Sofia"});
                 context.Towns.Add(new Town() { TownName = "Plovdiv" });
                 context.SaveChanges();
             }
@@ -93,6 +93,57 @@ namespace TeraNetSystem.Data.Migrations
                 };
                 userManager.Create(networkMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(networkMan.Id, NETWORK_ROLE);
+            }
+            if (!context.Offices.Any())
+            {
+                var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
+
+                var newOffice = new Office()
+                {
+                    Town = sofiaTownFromDb,
+                    Address = "Maldost, Atanas Manchev 122",
+                    Phone = "0888555444"
+                };
+                context.Offices.Add(newOffice);
+
+                var anotherOffice = new Office()
+                {
+                    Town = sofiaTownFromDb,
+                    Address = "Studentski grad, 8mi Dekemvri",
+                    Phone="0877111222"
+                };
+
+                context.Offices.Add(anotherOffice);
+
+                context.SaveChanges();
+            }
+            if (!context.Payments.Any())
+            {
+                var officeFromDb = context.Offices.FirstOrDefault(o => o.Address == "Maldost, Atanas Manchev 122");
+                var admin = context.Users.FirstOrDefault(u => u.UserName == "admin@teranet.com");
+
+                context.Payments.Add(new Payment()
+                {
+                        Client = admin,
+                        Office = officeFromDb,
+                        PerMonth = Month.April,
+                });
+
+                context.Payments.Add(new Payment()
+                {
+                    Client = admin,
+                    Office = officeFromDb,
+                    PerMonth = Month.March,
+                });
+
+                context.Payments.Add(new Payment()
+                {
+                    Client = admin,
+                    Office = officeFromDb,
+                    PerMonth = Month.July,
+                });
+
+                context.SaveChanges();
             }
         }
 

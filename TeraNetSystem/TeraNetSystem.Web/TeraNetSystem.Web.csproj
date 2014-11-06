@@ -159,7 +159,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\OfficeController.cs" />
     <Compile Include="Areas\Administration\Controllers\TownController.cs" />
+    <Compile Include="Areas\Administration\Models\OfficeViewModel.cs" />
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -190,6 +193,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\socialglyphs-webfont.svg" />
+    <Content Include="Content\images\office.png" />
     <Content Include="Content\images\TeraNetLogo.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -272,6 +276,12 @@
     <Content Include="Areas\Administration\Views\Town\DeletePage.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\TownPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Town\EditPage.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\ListOffices.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\CreatePage.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\EditPage.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\DelePage.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_OfficePartial.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

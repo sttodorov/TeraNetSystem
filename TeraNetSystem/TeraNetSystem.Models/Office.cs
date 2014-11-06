@@ -2,22 +2,24 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public class Office
+    public class Office : IEntityProtectedDelete
     {
         private ICollection<Payment> payments;
 
         public Office()
             :base()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.Payments = new HashSet<Payment>();
+            this.IsDeleted = false;
         }
 
         public Guid Id { get; set; }
 
-        [Required]
+        //[Required]
         public int TownId { get; set; }
 
         public virtual Town Town { get; set; }
@@ -30,7 +32,8 @@
         [Required]
         public string Phone { get; set; }
 
-        [Required]
+        //[Required]
+        [DefaultValue("~/Content/images/office.png")]
         public string ImagePath { get; set; }
 
         public virtual ICollection<Payment> Payments
@@ -44,5 +47,9 @@
                 this.payments = value;
             }
         }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

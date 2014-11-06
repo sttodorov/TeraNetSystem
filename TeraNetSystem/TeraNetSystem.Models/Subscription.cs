@@ -1,15 +1,17 @@
 ﻿namespace TeraNetSystem.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Subscription
+    public class Subscription : IEntityProtectedDelete
     {
         private ICollection<ApplicationUser> users;
 
         public Subscription()
         {
             this.Users = new HashSet<ApplicationUser>();
+            this.IsDeleted = false;
         }
 
         public int Id { get; set; }
@@ -41,5 +43,9 @@
                 this.users = value;
             }
         }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

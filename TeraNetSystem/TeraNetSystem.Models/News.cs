@@ -3,11 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class News
+    public class News : IEntityProtectedDelete
     {
         public News()
         {
             this.DateCreated = DateTime.Now;
+            this.IsDeleted = false;
         }
 
         public int Id { get; set; }
@@ -32,5 +33,9 @@
         public int AuthorId { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEntityProtectedDelete.cs" />
     <Compile Include="Subscription.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Month.cs" />

@@ -1,0 +1,78 @@
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
+<h2>
+    @ViewBag.Title
+
+</h2>
+
+<div class="content-box box-default">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.ImagePath" alt="OfficeImage" class="img-responsive">
+        </div>
+        <div class="col-md-8">
+            <h4 class="content-box-title">@Model.Id</h4>
+
+            <ul class="list-unstyled text-left">
+                <li>
+                    <span class="col-lg-3 no-padding">Town:</span>
+                    @Model.TownName
+                </li>
+                <li>
+                    <span class="col-lg-3 no-padding">Address:</span>
+                    @if (ViewBag.Title == "Edit office")
+                    {
+                        @Html.EditorFor(m => m.Address)
+                    }
+                    else
+                    {
+                        @Html.DisplayTextFor(m => m.Address)
+                    }
+                </li>
+                <li>
+                    <span class="col-lg-3 no-padding">Phone:</span>
+                    @if (ViewBag.Title == "Edit office")
+                    {
+                        @Html.EditorFor(m => m.Phone)
+                    }
+                    else
+                    {
+                        @Html.DisplayTextFor(m => m.Phone)
+                    }
+                </li>
+            </ul>
+            <button id="ShowPayments" class="button button-flat-primary">Show payments</button>
+            <div id="OfficeLastPaymments" class="text-left border-box ">
+                @foreach (var payment in Model.Payments.OrderByDescending(x => x.DateCreated).Take(3))
+                {
+                    <span class="col-lg-3 no-padding">Date created:</span>
+                    @payment.DateCreated
+                    <ul class="list-unstyled">
+                        <li>
+                            <span class="col-lg-3 no-padding">Client:</span>
+                            @payment.ClientUserName
+                        </li>
+                        <li>
+                            <span class="col-lg-3 no-padding">Per month :</span>
+                            @payment.PerMonth
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $('documet').on('#ShowPayments','click', function () {
+            if ($('#OfficePayments').hasClass('hide')) {
+                $('#OfficePayments').removeClass('hide');
+                this.innerHtml = 'Hide Payments';
+            }
+            else {
+                $('#OfficePayments').addClass('hide');
+                this.innerHtml = 'Show Payments';
+            }
+        })
+    </script>
+}

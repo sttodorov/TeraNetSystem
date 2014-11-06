@@ -25,15 +25,16 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         {
             int pageNumber = id.GetValueOrDefault(1);
 
-            var towns = this.Data.Towns.All()
-                            .OrderBy(x => x.Id)
-                            .Skip((pageNumber - 1) * PageSize)
-                            .Take(PageSize)
-                            .Select(TownViewModel.FromTown)
-                            .ToList();
+            var allTowns = this.Data.Towns.All();
 
-            ViewBag.Pages = Math.Ceiling((double)this.Data.Towns.All().Count() / PageSize);
-            return View(towns);
+            var pageTowns = allTowns.OrderBy(x => x.Id)
+                             .Skip((pageNumber - 1) * PageSize)
+                             .Take(PageSize)
+                             .Select(TownViewModel.FromTown)
+                             .ToList();
+
+            ViewBag.Pages = Math.Ceiling((double)allTowns.Count() / PageSize);
+            return View(pageTowns);
         }
 
         [HttpGet]

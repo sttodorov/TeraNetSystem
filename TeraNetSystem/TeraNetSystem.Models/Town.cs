@@ -1,10 +1,11 @@
 ﻿namespace TeraNetSystem.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Town
+    public class Town : IEntityProtectedDelete
     {
         private ICollection<ApplicationUser> users;
         private ICollection<Office> offices;
@@ -13,6 +14,7 @@
         {
             this.Users = new HashSet<ApplicationUser>();
             this.Offices = new HashSet<Office>();
+            this.IsDeleted = false;
         }
 
         public int Id { get; set; }
@@ -46,5 +48,9 @@
                 this.users = value;
             }
         }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

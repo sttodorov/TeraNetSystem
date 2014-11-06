@@ -3,13 +3,14 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class WorkTask
+    public class WorkTask : IEntityProtectedDelete
     {
         public WorkTask()
         {
             this.Id = new Guid();
             this.DateCreated = DateTime.Now;
             this.Compleated = false;
+            this.IsDeleted = false;
         }
         public Guid Id { get; set; }
 
@@ -35,5 +36,9 @@
         public int  NetworkManId { get; set; }
 
         public virtual ApplicationUser NetworkMan { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

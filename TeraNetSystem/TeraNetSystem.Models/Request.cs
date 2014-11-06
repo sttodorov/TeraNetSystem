@@ -3,11 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Request
+    public class Request : IEntityProtectedDelete
     {
         public Request()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
+            this.IsDeleted = false;
         }
 
         public Guid Id { get; set; }
@@ -39,5 +40,9 @@
 
         [Required]
         public string PhoneNumber { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 }

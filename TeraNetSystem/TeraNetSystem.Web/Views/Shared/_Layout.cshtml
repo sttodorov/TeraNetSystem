@@ -25,7 +25,7 @@
     <header id="header-full-top" class="hidden-xs header-full">
         <div class="container">
             <div class="header-full-title">
-                <img src="~/Content/images/TeraNetLogo.png" alt="TeraNetLogo"  id="logo"/>
+                <img src="~/Content/images/TeraNetLogo.png" alt="TeraNetLogo" id="logo" />
             </div>
             <nav class="top-nav">
                 <ul class="top-nav-social hidden-sm">
@@ -33,7 +33,7 @@
                     <li><a href="#" class="animated fadeIn linkedin"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
-                
+
             </nav>
         </div>
     </header>
@@ -41,13 +41,13 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Services", "All", "Services")</li>
-                    <li>@Html.ActionLink("Contact", "Offices", "Contacts")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { Area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Services", "All", "Services", new { Area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Contact", "Offices", "Contacts", new { Area = string.Empty }, null)</li>
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Towns", "ListTowns", "Administration/Town")</li>
-                        <li>@Html.ActionLink("Offices", "GetAll", "Administration/Office")</li>
+                        <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
+                        <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
                     }
                 </ul>
             </div><!-- navbar-collapse -->
@@ -101,7 +101,7 @@
                     </ul>
                 </div>
             </div> <!-- row -->
-            
+
         </div> <!-- container -->
     </aside>
     <footer id="footer">

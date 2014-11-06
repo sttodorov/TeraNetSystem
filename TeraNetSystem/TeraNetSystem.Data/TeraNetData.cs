@@ -93,7 +93,7 @@ namespace TeraNetSystem.Data
             this.context.SaveChanges();
         }
 
-        private IGenericRepository<T> GetRepository<T>() where T : class
+        private IGenericRepository<T> GetRepository<T>() where T : class, IEntityProtectedDelete
         {
             var typeOfModel = typeof(T);
             if (!this.repositories.ContainsKey(typeOfModel))

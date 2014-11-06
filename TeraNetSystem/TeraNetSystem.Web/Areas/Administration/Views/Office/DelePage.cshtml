@@ -1,27 +1,27 @@
 ﻿@model TeraNetSystem.Web.Areas.Administration.Models.TownViewModel
 
 @{
-    ViewBag.Title = "Delete town";
+    ViewBag.Title = "Delete office";
 }
 
-<p class="text-danger">NOTE: Deleting a town will cascade delete all its offices and users!</p>
+<p class="text-danger">NOTE: Deleting a Office will cascade delete all payments made there!</p>
 
 <div class="row">
-@Html.Partial("TownPartial")
+    @Html.Partial("_OfficePartial")
 </div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-actions no-color row">
         <button class="button button-rounded button-flat-caution" type="submit">
             <i class=" fa fa-warning no-margin no-padding">
                 Delete
             </i>
         </button>
-        <a class="button button-rounded button-flat-primary" href="@Url.Action("ListTowns", "Town")">
-                Cancel
+        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListOffices", "Office")">
+            Cancel
         </a>
     </div>
 }

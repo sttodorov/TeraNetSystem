@@ -5,9 +5,10 @@
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Linq.Expressions;
+    using TeraNetSystem.Models;
 
     public class GenericRepository<T> : IGenericRepository<T>
-        where T : class
+        where T : class, IEntityProtectedDelete
     {
         private ITeraNetContext context;
 
@@ -18,7 +19,7 @@
 
         public IQueryable<T> All()
         {
-            return this.context.SetEntity<T>();
+            return this.context.SetEntity<T>().AsParallel().Where(c => c.IsDeleted == false).AsQueryable();
         }
 
         public IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions)
@@ -38,7 +39,16 @@
 
         public T Delete(T entity)
         {
-            this.ChangeState(entity, EntityState.Deleted);
+            if(entity is IEntityProtectedDelete)
+            {
+                (entity as IEntityProtectedDelete).IsDeleted = true;
+                (entity as IEntityProtectedDelete).DateDeleted = DateTime.Now;
+                this.ChangeState(entity, EntityState.Modified);
+            }
+            else
+            {
+                this.ChangeState(entity, EntityState.Deleted);
+            }
             return entity;
         }
 

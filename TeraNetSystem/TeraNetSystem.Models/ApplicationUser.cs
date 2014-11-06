@@ -9,7 +9,7 @@
     using System.Collections.Generic;
     using System;
 
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IEntityProtectedDelete
     {
         private ICollection<Payment> payments;
 
@@ -18,6 +18,7 @@
         {
             this.Payments = new HashSet<Payment>();
             this.DateRegistered = DateTime.Now;
+            IsDeleted = false;
         }
 
         [Required]
@@ -64,6 +65,10 @@
             }
         }
 
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -71,7 +76,5 @@
             // Add custom user claims here
             return userIdentity;
         }
-
-
     }
 }

@@ -16,6 +16,16 @@ namespace TeraNetSystem.Web.Controllers
             this.Data = new TeraNetData();
         }
 
-        protected ITeraNetData Data { get; private set; }
+        protected ITeraNetData Data
+        {
+            get
+            {
+                return this.data;
+            }
+            private set
+            {
+                this.data = value;
+            }
+        }
     }
 }

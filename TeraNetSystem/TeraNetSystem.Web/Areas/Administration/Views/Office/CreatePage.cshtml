@@ -1,0 +1,30 @@
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
+@{
+    ViewBag.Title = "Add Office";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Office", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="input-group login-input">
+        @Html.DisplayFor(m => m.TownName)
+        <br />
+        @Html.TextBox("newTownName")
+    </div>
+    @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+
+    <br>
+
+    <button type="submit" class="button button-rounded button-flat-primary">
+        <i class="glyphicon glyphicon-upload">
+            Add
+        </i>
+    </button>
+
+    <div class="clearfix"></div>
+}
