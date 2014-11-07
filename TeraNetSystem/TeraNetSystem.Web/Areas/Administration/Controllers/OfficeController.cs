@@ -51,6 +51,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] 
         public ActionResult Create(OfficeCreateModel newOfficeModel)
         {
             if (ModelState.IsValid)
@@ -127,7 +128,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost, ActionName("EditPage")]
-        
+        [ValidateAntiForgeryToken] 
         public ActionResult EditPagePost(OfficeViewModel edditedOffice)
         {
             var officeToEdit = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == edditedOffice.Id);
@@ -158,6 +159,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost, ActionName("DeletePage")]
+        [ValidateAntiForgeryToken] 
         public ActionResult DeletePagePost(string id)
         {
             var officeToBeDeleted = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == id);

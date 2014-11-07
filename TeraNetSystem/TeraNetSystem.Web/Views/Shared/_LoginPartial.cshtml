@@ -15,8 +15,9 @@
 else
 {
     <div class="dropdown animated fadeInDown">
-        @*<i class="fa fa-user"></i>*@
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-        @* TODO: Replace with a gref=URL.ACTIONLINK this way can insert icon *@
+        <a href="@Url.Action("Login", "Account", routeValues: null)">
+            <i class="fa fa-user"></i>
+            Log in
+        </a>
     </div>
 }

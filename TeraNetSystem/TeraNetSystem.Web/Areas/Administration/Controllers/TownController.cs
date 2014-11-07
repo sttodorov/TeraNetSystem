@@ -50,6 +50,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] 
         public ActionResult Create(string newTownName)
         {
             if (ModelState.IsValid)
@@ -87,6 +88,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken] 
         public ActionResult DeletePage(int id)
         {
             var townToBeDeleted = this.Data.Towns.All().FirstOrDefault(t => t.Id == id);
@@ -125,6 +127,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] 
         public ActionResult EditPage(TownViewModel edditedTown)
         {
             var townToBeEdiited = this.Data.Towns.All().FirstOrDefault(t => t.Id == edditedTown.Id);
