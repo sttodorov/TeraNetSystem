@@ -1,9 +1,9 @@
 ﻿namespace TeraNetSystem.Web.Models
 {
     using System;
+    using System.ComponentModel;
     using System.Linq;
     using System.Linq.Expressions;
-
     using TeraNetSystem.Models;
 
     public class PaymentViewModel
@@ -26,14 +26,19 @@
 
         public int Id { get; set; }
 
+        [DisplayName("Date created:")]
         public DateTime DateCreated { get; set; }
 
+        [DisplayName("Per month:")]
         public Month PerMonth { get; set; }
 
+        [DisplayName("Username:")]
         public string ClientUserName { get; set; }
 
+        [DisplayName("Town:")]
         public string OfficeTown { get; set; }
 
+        [DisplayName("Address:")]
         public string OfficeAddress { get; set; }
     }
 }

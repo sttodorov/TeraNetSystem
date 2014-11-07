@@ -1,5 +1,5 @@
 ﻿@model TeraNetSystem.Web.Areas.Administration.Models.TownViewModel
-<div class="panel panel-default portfolio-item-panel col-lg-6 no-padding">
+<div class="panel panel-default portfolio-item-panel col-lg-6 no-padding margin-top">
     <div class="panel-heading">
         @ViewBag.Title - @Model.TownName
     </div>
@@ -10,7 +10,7 @@
                     @Html.LabelFor(m => m.Id)
                 </span>
                 <span class="col-lg-4">
-                    @Html.DisplayTextFor(m => m.Id)
+                    @Html.DisplayFor(m => m.Id)
                 </span>
             </li>
             <li class="row">
@@ -24,7 +24,7 @@
                     }
                     else
                     {
-                        @Html.EditorFor(m => m.TownName)
+                        @Html.EditorFor(m => m.TownName, new { Value = Model.TownName})
                     }
                 </span>
             </li>
@@ -33,7 +33,7 @@
                     @Html.LabelFor(m => m.OfficesCount)
                 </span>
                 <span class="col-lg-4">
-                    @Html.DisplayTextFor(m => m.OfficesCount)
+                    @Html.DisplayFor(m => m.OfficesCount)
                 </span>
             </li>
             <li class="row">
@@ -41,7 +41,7 @@
                     @Html.LabelFor(m => m.UsersCount)
                 </span>
                 <span class="col-lg-4">
-                    @Html.DisplayTextFor(m => m.UsersCount)
+                    @Html.DisplayFor(m => m.UsersCount)
                 </span>
             </li>
         </ul>

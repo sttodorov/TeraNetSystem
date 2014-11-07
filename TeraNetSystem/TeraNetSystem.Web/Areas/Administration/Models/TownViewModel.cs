@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq.Expressions;
     using TeraNetSystem.Models;
 
@@ -24,6 +25,7 @@
         public int Id { get; set; }
 
         [DisplayName("Town name:")]
+        [DataType(DataType.Text)]
         public string TownName { get; set; }
 
         [DisplayName("Offices count:")]

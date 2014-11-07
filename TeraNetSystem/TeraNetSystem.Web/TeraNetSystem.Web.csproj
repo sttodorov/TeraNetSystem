@@ -279,7 +279,7 @@
     <Content Include="Areas\Administration\Views\Office\ListOffices.cshtml" />
     <Content Include="Areas\Administration\Views\Office\CreatePage.cshtml" />
     <Content Include="Areas\Administration\Views\Office\EditPage.cshtml" />
-    <Content Include="Areas\Administration\Views\Office\DelePage.cshtml" />
+    <Content Include="Areas\Administration\Views\Office\DeletePage.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_OfficePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Office\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -332,10 +332,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Text.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\_ListPaymentsPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Month.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Payments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

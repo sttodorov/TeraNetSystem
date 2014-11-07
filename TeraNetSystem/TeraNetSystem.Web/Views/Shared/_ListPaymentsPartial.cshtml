@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Models.PaymentViewModel>
+
+@foreach (var payment in Model)
+{
+    
+    <ul class="list-unstyled">
+        <li class="row">
+            <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.DateCreated)</span>
+            @Html.DisplayFor(m => payment.DateCreated)
+        </li>
+        <li class="row">
+            <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.ClientUserName)</span>
+           @Html.DisplayFor(m => payment.ClientUserName)
+        </li>
+        <li class ="row">
+            <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.PerMonth)</span>
+            @Html.DisplayFor(m => payment.PerMonth)
+        </li>
+    </ul>
+}

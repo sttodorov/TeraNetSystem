@@ -7,6 +7,8 @@
     
     using TeraNetSystem.Models;
     using TeraNetSystem.Web.Models;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public class OfficeViewModel
     {
@@ -36,12 +38,20 @@
 
         public string Id { get; set; }
 
+        [DisplayName("Town:")]
         public string TownName { get; set; }
 
+        [DisplayName("Address:")]
+        [DataType(DataType.MultilineText)]
         public string Address { get; set; }
 
+        [DisplayName("Phone:")]
+        [DataType(DataType.PhoneNumber)]
+        [UIHint("Text")]
         public string Phone { get; set; }
 
+        [DisplayName("Photo:")]
+        [DataType(DataType.Upload)]
         public string ImagePath { get; set; }
 
         public ICollection<PaymentViewModel> Payments { get; set; }
