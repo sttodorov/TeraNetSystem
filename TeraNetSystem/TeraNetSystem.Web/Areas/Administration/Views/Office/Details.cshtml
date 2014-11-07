@@ -1,31 +1,32 @@
-﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.AdminOfficeViewModel
 
 @{
     ViewBag.Title = "Office details";
 }
+<div class="admin-panel">
 
-<div class="row">
-    @Html.Partial("_OfficePartial")
+    <div class="row">
+        @Html.Partial("_OfficePartial")
+    </div>
+
+    <a class="button button-rounded button-flat-caution" href="@Url.Action("ListOffices", "Office")">
+        Back to list
+    </a>
 </div>
-
-<a class="button button-rounded button-flat-caution" href="@Url.Action("ListOffices", "Office")">
-    Back to list
-</a>
-
-@section scripts
+    @section scripts
 {
-    <script>
-        $('#ShowPayments').click(function () {
-            var $this = $(this);
-            var $paymentBox = $('#OfficeLastPaymments');
+        <script>
+            $('#ShowPayments').click(function () {
+                var $this = $(this);
+                var $paymentBox = $('#OfficeLastPaymments');
 
-            if ($paymentBox.hasClass('hide')) {
-                $paymentBox.removeClass('hide');
-                $this.text('Hide payments');
-            } else {
-                $paymentBox.addClass('hide');
-                $this.text('Show payments');
-            }
-        });
-    </script>
-}
+                if ($paymentBox.hasClass('hide')) {
+                    $paymentBox.removeClass('hide');
+                    $this.text('Hide payments');
+                } else {
+                    $paymentBox.addClass('hide');
+                    $this.text('Show payments');
+                }
+            });
+        </script>
+    }

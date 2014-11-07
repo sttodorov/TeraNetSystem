@@ -1,4 +1,4 @@
-﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.AdminOfficeViewModel
 
 @{
     ViewBag.Title = "Edit office";
@@ -6,18 +6,22 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    <div class="row">
-        @Html.Partial("_OfficePartial")
-    </div>
 
-    <div class="form-actions no-color row">
-        <button class="button button-rounded button-flat-primary" type="submit">
-            Apply
-        </button>
-        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListOffices", "Office")">
-            Cancel
-        </a>
+    @Html.AntiForgeryToken()
+    <div class="admin-panel">
+
+        <div class="row">
+            @Html.Partial("_OfficePartial")
+        </div>
+
+        <div class="form-actions no-color row">
+            <button class="button button-rounded button-flat-primary" type="submit">
+                Apply
+            </button>
+            <a class="button button-rounded button-flat-caution" href="@Url.Action("ListOffices", "Office")">
+                Cancel
+            </a>
+        </div>
     </div>
 }
 

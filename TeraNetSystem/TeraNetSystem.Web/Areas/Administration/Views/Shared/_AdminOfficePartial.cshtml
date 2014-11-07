@@ -1,0 +1,20 @@
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.AdminOfficeViewModel
+
+@if (ViewBag.Title == "Office details")
+{
+    <button id="ShowPayments" class="button button-flat-primary">Show payments</button>
+}
+
+<div id="OfficeLastPaymments" class="text-left border-box hide">
+    @{
+        if (Model.Payments.Any())
+        {
+            @Html.Partial("_ListPaymentsPartial", Model.Payments.OrderByDescending(p => p.DateCreated).Take(3))
+        }
+        else
+        {
+            @: No Payments
+        }
+    }
+</div>
+

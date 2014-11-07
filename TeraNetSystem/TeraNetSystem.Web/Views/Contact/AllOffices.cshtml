@@ -1,0 +1,9 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Models.OfficeViewModel>
+@{
+    ViewBag.Title = "Contacts";
+}
+<h2>@ViewBag.Title</h2>
+@foreach (var office in @Model)
+{
+        Html.RenderPartial("_OfficePartial",office);
+}

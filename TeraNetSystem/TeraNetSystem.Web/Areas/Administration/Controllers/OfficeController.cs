@@ -1,17 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using TeraNetSystem.Models;
-using TeraNetSystem.Web.Areas.Administration.Models;
-using TeraNetSystem.Web.Controllers;
-using TeraNetSystem.Data;
-
-namespace TeraNetSystem.Web.Areas.Administration.Controllers
+﻿namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using TeraNetSystem.Data;
+    using TeraNetSystem.Models;
+    using TeraNetSystem.Web.Areas.Administration.Models;
+    using TeraNetSystem.Web.Controllers;
+
     public class OfficeController : BaseController
     {
         private const int PageSize = 5;
@@ -32,7 +31,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
             var pageOffices = allOffices.OrderBy(x => x.Id)
                             .Skip((pageNumber - 1) * PageSize)
                             .Take(PageSize)
-                            .Select(OfficeViewModel.FromOffice)
+                            .Select(AdminOfficeViewModel.FromOffice)
                             .ToList();
 
             ViewBag.Pages = Math.Ceiling((double)allOffices.Count() / PageSize);
@@ -99,7 +98,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectedOffice = this.Data.Offices.All().Select(OfficeViewModel.FromOffice).FirstOrDefault(t => t.Id.ToString() == id);
+            var selectedOffice = this.Data.Offices.All().Select(AdminOfficeViewModel.FromOffice).FirstOrDefault(t => t.Id.ToString() == id);
 
             if (selectedOffice == null)
             {
@@ -117,7 +116,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectedOffice = this.Data.Offices.All().Select(OfficeViewModel.FromOffice).FirstOrDefault(t => t.Id.ToString() == id);
+            var selectedOffice = this.Data.Offices.All().Select(AdminOfficeViewModel.FromOffice).FirstOrDefault(t => t.Id.ToString() == id);
 
             if (selectedOffice == null)
             {
@@ -129,7 +128,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
 
         [HttpPost, ActionName("EditPage")]
         [ValidateAntiForgeryToken] 
-        public ActionResult EditPagePost(OfficeViewModel edditedOffice)
+        public ActionResult EditPagePost(AdminOfficeViewModel edditedOffice)
         {
             var officeToEdit = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == edditedOffice.Id);
 
@@ -148,7 +147,7 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectedOffice = this.Data.Offices.All().Select(OfficeViewModel.FromOffice).FirstOrDefault(t => t.Id == id);
+            var selectedOffice = this.Data.Offices.All().Select(AdminOfficeViewModel.FromOffice).FirstOrDefault(t => t.Id == id);
 
             if (selectedOffice == null)
             {
@@ -169,12 +168,12 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
                 this.Data.Payment.Delete(payment);
             }
 
+            
+
             this.Data.Offices.Delete(officeToBeDeleted);
             this.Data.SaveChanges();
 
-            return Redirect("ListOffices");
+            return RedirectToAction("ListOffices");
         }
-
-
     }
 }

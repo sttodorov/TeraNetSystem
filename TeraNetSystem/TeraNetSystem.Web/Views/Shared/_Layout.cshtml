@@ -43,7 +43,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { Area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Services", "All", "Services", new { Area = string.Empty }, null)</li>
-                    <li>@Html.ActionLink("Contact", "Offices", "Contacts", new { Area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Contact", "AllOffices", "Contact", new { Area = string.Empty }, null)</li>
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>

@@ -1,13 +1,15 @@
-﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
-<h2>
-    @ViewBag.Title
+﻿@model TeraNetSystem.Web.Models.OfficeViewModel
+@if (ViewBag.Title != "Contacts")
+{
+    <h2>
+        @ViewBag.Title
+    </h2>
+}
 
-</h2>
-
-<div class="content-box box-default">
+<div class="content-box box-default margin-top">
     <div class="row">
         <div class="col-md-4">
-            <img src="@Url.Content(Model.ImagePath)" alt="OfficeImage" class="img-responsive">
+            <img src="@Url.Content(Model.ImagePath)" alt="OfficeImage" class="img-responsive" width="250">
         </div>
         <div class="col-md-8">
             <h4 class="content-box-title">@Html.DisplayFor(m => m.Id)</h4>
@@ -21,7 +23,7 @@
                     <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Address)</span>
                     @if (ViewBag.Title == "Edit office")
                     {
-                        @Html.EditorFor(m => m.Address, new { Value = Model.Address})
+                        @Html.EditorFor(m => m.Address, new { Value = Model.Address })
                     }
                     else
                     {
@@ -34,7 +36,7 @@
                     </span>
                     @if (ViewBag.Title == "Edit office")
                     {
-                        @Html.EditorFor(m => m.Phone, new { Value = Model.Phone})
+                        @Html.EditorFor(m => m.Phone, new { Value = Model.Phone })
                     }
                     else
                     {
@@ -42,24 +44,12 @@
                     }
                 </li>
             </ul>
-
-            @if (ViewBag.Title == "Office details")
+            @if (ViewBag.Title != "Contacts")
             {
-                <button id="ShowPayments" class="button button-flat-primary">Show payments</button>
+                Html.RenderPartial("_AdminOfficePartial", Model);
             }
 
-            <div id="OfficeLastPaymments" class="text-left border-box hide">
-                @{
-                    if (Model.Payments.Any())
-                    {
-                        @Html.Partial("_ListPaymentsPartial", Model.Payments.OrderByDescending(p => p.DateCreated).Take(3))
-                    }
-                    else
-                    {
-                        @: No Payments
-                    }
-                }
-            </div>
+
         </div>
     </div>
 </div>

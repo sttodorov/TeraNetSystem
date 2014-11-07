@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using TeraNetSystem.Web.Controllers;
-using TeraNetSystem.Web.Areas.Administration.Models;
-using TeraNetSystem.Models;
-using System.Net;
-using TeraNetSystem.Data;
-
-namespace TeraNetSystem.Web.Areas.Administration.Controllers
+﻿namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using TeraNetSystem.Data;
+    using TeraNetSystem.Models;
+    using TeraNetSystem.Web.Areas.Administration.Models;
+    using TeraNetSystem.Web.Controllers;
+
     public class TownController : BaseController
     {
         private const int PageSize = 3;
