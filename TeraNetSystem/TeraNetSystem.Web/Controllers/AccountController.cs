@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TeraNetSystem.Web.Models;
 using TeraNetSystem.Models;
+using TeraNetSystem.Data;
 
 namespace TeraNetSystem.Web.Controllers
 {
@@ -18,8 +19,11 @@ namespace TeraNetSystem.Web.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        
+        public AccountController(ITeraNetData data)
+            :base(data)
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,12 +8,19 @@ using System.Web.Mvc;
 using TeraNetSystem.Models;
 using TeraNetSystem.Web.Areas.Administration.Models;
 using TeraNetSystem.Web.Controllers;
+using TeraNetSystem.Data;
 
 namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
     public class OfficeController : BaseController
     {
-        private const int PageSize = 3;
+        private const int PageSize = 5;
+
+        public OfficeController(ITeraNetData data)
+            :base(data)
+        {
+
+        }
 
         [HttpGet]
         public ActionResult ListOffices(int? id)
@@ -34,16 +42,44 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         [HttpGet]
         public ActionResult CreatePage()
         {
+            var towns = this.Data.Towns.All().ToList();
+
+            ViewBag.Towns = towns;
+
+            ViewBag.TownId = new SelectList(this.Data.Towns.All().ToList(), "Id", "TownName");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(OfficeViewModel newOfficeModel)
+        public ActionResult Create(OfficeCreateModel newOfficeModel)
         {
             if (ModelState.IsValid)
             {
+                string imagePath = string.Empty;
+                string imageExt = Path.GetExtension(newOfficeModel.Image.FileName);
+
+                if(newOfficeModel.Image == null)
+                {
+                    imagePath = "~/Content/images/office.png";
+                }
+                else
+                {
+                    imagePath ="~/Files/offices/" + newOfficeModel.TownId;
+                    string imageName = Guid.NewGuid().ToString();
+                    if(!Directory.Exists(Server.MapPath(imagePath)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(imagePath));
+                    }
+                    imagePath += "/" + imageName + imageExt;
+                    newOfficeModel.Image.SaveAs(Server.MapPath(imagePath));
+                }
+
                 var newOffice = new Office()
                 {
+                    TownId = newOfficeModel.TownId,
+                    Address = newOfficeModel.Address,
+                    Phone = newOfficeModel.Phone,
+                    ImagePath = imagePath
                  
                 };
 

@@ -13,11 +13,6 @@ namespace TeraNetSystem.Data
 
         private IDictionary<Type, object> repositories;
 
-        public TeraNetData()
-            : this(new TeraNetContext())
-        {
-        }
-
         public TeraNetData(ITeraNetContext context)
         {
             this.context = context;

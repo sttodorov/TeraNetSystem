@@ -1,30 +1,81 @@
-﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeViewModel
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeCreateModel
 @{
     ViewBag.Title = "Add Office";
 }
 
-<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Create", "Office", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Create", "Office", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal admin-panel", enctype = "multipart/form-data" }))
 {
+    <h2>@ViewBag.Title</h2>
+
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="input-group login-input">
-        @Html.DisplayFor(m => m.TownName)
-        <br />
-        @Html.TextBox("newTownName")
+    <div class="content-box box-default">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Url.Content("~/Content/images/office.png")" alt="OfficeImage" class="img-responsive" id="office-image">
+            </div>
+            <div class="col-md-8">
+                <h4 class="content-box-title">Office information</h4>
+
+                <ul class="list-unstyled text-left">
+                    <li class="row margin-10">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.TownId)</span>
+                        <div class="controls">
+                            @Html.DropDownList("TownId", string.Empty)
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </li>
+                    <li class="row margin-10">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Address)</span>
+                        @Html.EditorFor(m => m.Address, new { Value = string.Empty })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                    </li>
+                    <li class="row margin-10">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Phone)</span>
+                        @Html.EditorFor(m => m.Phone, new { Value = string.Empty })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                    </li>
+                    <li class="row margin-10">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Image)</span>
+                        <span>
+                            <input type="file" name="Image" id="input-image" value=" " class="form-control col-lg-4" />
+                        </span>
+                        @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                    </li>
+                </ul>
+
+                <button type="submit" class="button button-rounded button-flat-primary pull-left">
+                    <i class="fa fa-upload">
+                        Add
+                    </i>
+                </button>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
     </div>
-    @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
-
-    <br>
-
-    <button type="submit" class="button button-rounded button-flat-primary">
-        <i class="glyphicon glyphicon-upload">
-            Add
-        </i>
-    </button>
-
-    <div class="clearfix"></div>
 }
+
+@section scripts
+{
+    <script>
+        $('#input-image').on('change', function () {
+            var $imgtag = $("#office-image");
+            var file = event.target.files[0];
+            
+            var reader = new FileReader();
+
+            $imgtag.title = file.name;
+
+            reader.onload = function (event) {
+                $imgtag.attr('src', event.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+}
+

@@ -13,7 +13,12 @@ namespace TeraNetSystem.Web.Controllers
 
         public BaseController()
         {
-            this.Data = new TeraNetData();
+            
+        }
+
+        public BaseController(ITeraNetData data)
+        {
+            this.Data = data;
         }
 
         protected ITeraNetData Data

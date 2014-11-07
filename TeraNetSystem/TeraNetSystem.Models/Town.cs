@@ -20,7 +20,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MinLength(5)]
+        [MinLength(3)]
         [MaxLength(30)]
         [Index(IsUnique = true)]
         public string TownName { get; set; }

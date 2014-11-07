@@ -7,6 +7,7 @@ using TeraNetSystem.Web.Controllers;
 using TeraNetSystem.Web.Areas.Administration.Models;
 using TeraNetSystem.Models;
 using System.Net;
+using TeraNetSystem.Data;
 
 namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
@@ -14,6 +15,11 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
     {
         private const int PageSize = 3;
 
+        public TownController(ITeraNetData data)
+            :base(data)
+        {
+
+        }
         // GET: Administration/Town
         public ActionResult Index()
         {

@@ -8,14 +8,17 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TeraNetSystem.Web.Models;
 using TeraNetSystem.Models;
+using TeraNetSystem.Data;
 
 namespace TeraNetSystem.Web.Controllers
 {
     [Authorize]
     public class ManageController : BaseController
     {
-        public ManageController()
+        public ManageController(ITeraNetData data)
+            :base(data)
         {
+
         }
 
         public ManageController(ApplicationUserManager userManager)

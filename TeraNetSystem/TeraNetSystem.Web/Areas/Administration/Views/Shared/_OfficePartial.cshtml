@@ -7,7 +7,7 @@
 <div class="content-box box-default">
     <div class="row">
         <div class="col-md-4">
-            <img src="@Model.ImagePath" alt="OfficeImage" class="img-responsive">
+            <img src="@Url.Content(Model.ImagePath)" alt="OfficeImage" class="img-responsive">
         </div>
         <div class="col-md-8">
             <h4 class="content-box-title">@Html.DisplayFor(m => m.Id)</h4>
@@ -49,7 +49,16 @@
             }
 
             <div id="OfficeLastPaymments" class="text-left border-box hide">
-                @Html.Partial("_ListPaymentsPartial", Model.Payments.OrderByDescending(p => p.DateCreated).Take(3));
+                @{
+                    if (Model.Payments.Any())
+                    {
+                        @Html.Partial("_ListPaymentsPartial", Model.Payments.OrderByDescending(p => p.DateCreated).Take(3))
+                    }
+                    else
+                    {
+                        @: No Payments
+                    }
+                }
             </div>
         </div>
     </div>
