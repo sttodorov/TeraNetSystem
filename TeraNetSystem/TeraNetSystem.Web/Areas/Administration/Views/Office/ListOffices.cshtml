@@ -5,7 +5,7 @@
 }
 <div class="admin-panel">
 
-    <h2>@ViewBag.Title</h2>
+    <h2>@ViewBag.Title </h2>
     @for (int i = 1; i <= ViewBag.Pages; i++)
     {
         <a class="button button-flat button-circle" href="@Url.Action("ListOffices", new { id = i })">@i</a>

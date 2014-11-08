@@ -15,7 +15,7 @@
         private const int PageSize = 3;
 
         public TownController(ITeraNetData data)
-            :base(data)
+            : base(data)
         {
 
         }
@@ -49,18 +49,20 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
-        public ActionResult Create(string newTownName)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(TownCreateModel createdTown)
         {
             if (ModelState.IsValid)
             {
                 var newTown = new Town()
                 {
-                    TownName = newTownName
+                    TownName = createdTown.Name
                 };
 
                 this.Data.Towns.Add(newTown);
                 this.Data.SaveChanges();
+
+                TempData["Success"] = String.Format("Town {0} added successfully!", createdTown.Name);
             }
 
             return RedirectToAction("ListTowns");
@@ -87,7 +89,7 @@
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public ActionResult DeletePage(int id)
         {
             var townToBeDeleted = this.Data.Towns.All().FirstOrDefault(t => t.Id == id);
@@ -126,7 +128,7 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public ActionResult EditPage(TownViewModel edditedTown)
         {
             var townToBeEdiited = this.Data.Towns.All().FirstOrDefault(t => t.Id == edditedTown.Id);

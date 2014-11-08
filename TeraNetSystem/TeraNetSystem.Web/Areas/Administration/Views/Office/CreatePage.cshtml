@@ -24,14 +24,14 @@
                     <li class="row margin-10">
                         <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.TownId)</span>
                         <div class="controls">
-                            @Html.DropDownList("TownId", string.Empty)
+                            @Html.DropDownListFor(m=>m.TownId,Model.Towns)
                         </div>
-                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.TownId, "", new { @class = "text-danger" })
                     </li>
                     <li class="row margin-10">
                         <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Address)</span>
                         @Html.EditorFor(m => m.Address, new { Value = string.Empty })
-                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                     </li>
                     <li class="row margin-10">
                         <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Phone)</span>

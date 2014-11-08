@@ -1,0 +1,35 @@
+﻿.PanelNotificationBox {
+	border: 1px solid;
+	margin: 10px auto;
+	padding: 23px 10px 23px 65px;
+	background-repeat: no-repeat;
+	background-position: 8px center;
+	width: 100%;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.PanelSuccess {
+	color: #61ac24;
+	background-color: #EDFCED;
+	background-image: url('Images/success-icon.png');
+}
+
+.PanelInfo {
+	color: #3F6AC0;
+	background-color: #EFF8FD;
+	background-image: url('Images/info-icon.png');
+}
+
+.PanelWarning {
+	color: #8C6211;
+	background-color: #FAF9C9;
+	background-image: url('Images/warning-icon.png');
+}
+
+.PanelError {
+	color: #c64141;
+	background-color: #ffeaea;
+	background-image: url('Images/error-icon.png');
+}

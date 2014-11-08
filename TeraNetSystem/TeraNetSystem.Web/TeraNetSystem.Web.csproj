@@ -176,6 +176,7 @@
     <Compile Include="Areas\Administration\Controllers\TownController.cs" />
     <Compile Include="Areas\Administration\Models\OfficeCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\AdminOfficeViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\TownCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -198,6 +199,11 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\buttons.css" />
+    <Content Include="Content\css\ErrorSuccessNotifier\ErrorSuccessNotifier.css" />
+    <Content Include="Content\css\ErrorSuccessNotifier\Images\error-icon.png" />
+    <Content Include="Content\css\ErrorSuccessNotifier\Images\info-icon.png" />
+    <Content Include="Content\css\ErrorSuccessNotifier\Images\success-icon.png" />
+    <Content Include="Content\css\ErrorSuccessNotifier\Images\warning-icon.png" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jquery.bxslider.css" />
     <Content Include="Content\css\lightbox.css" />

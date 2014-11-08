@@ -1,11 +1,11 @@
 ﻿namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
-
     using TeraNetSystem.Data;
     using TeraNetSystem.Models;
     using TeraNetSystem.Web.Areas.Administration.Models;
@@ -16,7 +16,7 @@
         private const int PageSize = 5;
 
         public OfficeController(ITeraNetData data)
-            :base(data)
+            : base(data)
         {
 
         }
@@ -41,32 +41,38 @@
         [HttpGet]
         public ActionResult CreatePage()
         {
-            var towns = this.Data.Towns.All().ToList();
+            var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice).ToList();
 
-            ViewBag.Towns = towns;
+            var selectedList = new List<SelectListItem>();
 
-            ViewBag.TownId = new SelectList(this.Data.Towns.All().ToList(), "Id", "TownName");
-            return View();
+            foreach (var item in towns)
+            {
+                selectedList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+
+            var createModel = new OfficeCreateModel() { Towns = selectedList };
+            return View(createModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public ActionResult Create(OfficeCreateModel newOfficeModel)
         {
             if (ModelState.IsValid)
             {
                 string imagePath = string.Empty;
-                string imageExt = Path.GetExtension(newOfficeModel.Image.FileName);
+                string imageExt = string.Empty;
 
-                if(newOfficeModel.Image == null)
+                if (newOfficeModel.Image == null)
                 {
                     imagePath = "~/Content/images/office.png";
                 }
                 else
                 {
-                    imagePath ="~/Files/offices/" + newOfficeModel.TownId;
+                    imagePath = "~/Files/offices/" + newOfficeModel.TownId;
+                    imageExt = Path.GetExtension(newOfficeModel.Image.FileName);
                     string imageName = Guid.NewGuid().ToString();
-                    if(!Directory.Exists(Server.MapPath(imagePath)))
+                    if (!Directory.Exists(Server.MapPath(imagePath)))
                     {
                         Directory.CreateDirectory(Server.MapPath(imagePath));
                     }
@@ -80,11 +86,14 @@
                     Address = newOfficeModel.Address,
                     Phone = newOfficeModel.Phone,
                     ImagePath = imagePath
-                 
+
                 };
 
                 this.Data.Offices.Add(newOffice);
                 this.Data.SaveChanges();
+
+                TempData["Success"] = String.Format("Office in {0} added successfully!", newOffice.Town.TownName);
+
             }
 
             return RedirectToAction("ListOffices");
@@ -127,7 +136,7 @@
         }
 
         [HttpPost, ActionName("EditPage")]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public ActionResult EditPagePost(AdminOfficeViewModel edditedOffice)
         {
             var officeToEdit = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == edditedOffice.Id);
@@ -158,7 +167,7 @@
         }
 
         [HttpPost, ActionName("DeletePage")]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public ActionResult DeletePagePost(string id)
         {
             var officeToBeDeleted = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == id);
@@ -168,7 +177,7 @@
                 this.Data.Payment.Delete(payment);
             }
 
-            
+
 
             this.Data.Offices.Delete(officeToBeDeleted);
             this.Data.SaveChanges();

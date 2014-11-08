@@ -11,6 +11,7 @@
     @Styles.Render("~/Content/css/slidebars.css")
     @Styles.Render("~/Content/css/lightbox.css")
     @Styles.Render("~/Content/css/jquery.bxslider.css")
+    @Styles.Render("~/Content/css/ErrorSuccessNotifier/ErrorSuccessNotifier.css")
     @Styles.Render("~/Content/css/syntaxhighlighter/shCore.css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -54,6 +55,15 @@
         </div><!-- container -->
     </nav>
     <div class="container body-content">
+        @if (@TempData["Error"] != null)
+        {
+            <div class="PanelNotificationBox PanelError">@TempData["Error"]</div>
+        }
+        @*@if (@TempData["Success"] != null)
+        {
+            <div class="PanelNotificationBox PanelSuccess">@TempData["Success"]</div>
+        }*@
+
         @RenderBody()
     </div>
     <aside id="footer-widgets">
@@ -109,6 +119,7 @@
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)
 </body>
