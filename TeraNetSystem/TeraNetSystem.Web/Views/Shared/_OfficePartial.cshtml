@@ -24,6 +24,7 @@
                     @if (ViewBag.Title == "Edit office")
                     {
                         @Html.EditorFor(m => m.Address, new { Value = Model.Address })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class="text-danger"})
                     }
                     else
                     {
@@ -37,6 +38,8 @@
                     @if (ViewBag.Title == "Edit office")
                     {
                         @Html.EditorFor(m => m.Phone, new { Value = Model.Phone })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+
                     }
                     else
                     {
@@ -48,8 +51,6 @@
             {
                 Html.RenderPartial("_AdminOfficePartial", Model);
             }
-
-
         </div>
     </div>
 </div>

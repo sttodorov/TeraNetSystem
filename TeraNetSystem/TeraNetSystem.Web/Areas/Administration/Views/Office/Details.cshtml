@@ -13,20 +13,20 @@
         Back to list
     </a>
 </div>
-    @section scripts
+@section scripts
 {
-        <script>
-            $('#ShowPayments').click(function () {
-                var $this = $(this);
-                var $paymentBox = $('#OfficeLastPaymments');
+    <script>
+        $('#ShowPayments').click(function () {
+            var $this = $(this);
+            var $paymentBox = $('#OfficeLastPaymments');
 
-                if ($paymentBox.hasClass('hide')) {
-                    $paymentBox.removeClass('hide');
-                    $this.text('Hide payments');
-                } else {
-                    $paymentBox.addClass('hide');
-                    $this.text('Show payments');
-                }
-            });
-        </script>
-    }
+            if ($paymentBox.hasClass('hide')) {
+                $paymentBox.removeClass('hide');
+                $this.text('Hide payments');
+            } else {
+                $paymentBox.addClass('hide');
+                $this.text('Show payments');
+            }
+        });
+    </script>
+}

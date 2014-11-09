@@ -9,7 +9,7 @@
     @{
         if (Model.Payments.Any())
         {
-            @Html.Partial("_ListPaymentsPartial", Model.Payments.OrderByDescending(p => p.DateCreated).Take(3))
+            @Html.Partial("_ListPaymentsPartial", Model.Payments)
         }
         else
         {

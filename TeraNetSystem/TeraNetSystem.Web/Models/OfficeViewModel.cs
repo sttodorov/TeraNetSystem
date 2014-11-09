@@ -29,15 +29,21 @@ namespace TeraNetSystem.Web.Models
         public string Id { get; set; }
 
         [DisplayName("Town:")]
+        [Required]
         public string TownName { get; set; }
 
         [DisplayName("Address:")]
         [DataType(DataType.MultilineText)]
+        [Required]
+        [MinLength(10)]
+        [MaxLength(50)]
         public string Address { get; set; }
 
         [DisplayName("Phone:")]
         [DataType(DataType.PhoneNumber)]
         [UIHint("Text")]
+        [Required]
+        [MinLength(4)]
         public string Phone { get; set; }
 
         [DisplayName("Photo:")]

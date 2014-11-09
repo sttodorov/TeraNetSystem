@@ -1,0 +1,138 @@
+﻿@model TeraNetSystem.Web.Models.SubscriptionViewModel
+
+
+    <h2>
+        @ViewBag.Title
+    </h2>
+
+<div class="pricign-box col-md-4 no-padding">
+    <div class="pricing-box-header">
+
+        @if (ViewBag.Title == "Create subscription")
+        {
+            @Html.LabelFor(m => m.SubscriptionName)
+            <span style="color:black">
+                @Html.EditorFor(m => m.SubscriptionName)
+            </span>
+        }
+        else
+        {
+            <h2>
+                @Html.DisplayFor(m => m.SubscriptionName)
+            </h2>
+        }
+        @Html.ValidationMessageFor(m => m.SubscriptionName, "", new { @class = "text-danger" })
+    </div>
+    <div class="pricing-box-price">
+        <h3>
+
+            @if (ViewBag.Title == "Edit subscription")
+            {
+                @Html.EditorFor(m => m.Price, new { Value = Model.Price })
+            }
+            else if (ViewBag.Title == "Create subscription")
+            {
+                @:</h3>
+                @Html.LabelFor(m => m.Price)
+                @:<h3>
+                @Html.EditorFor(m => m.Price)
+            }
+            else
+            {
+                @Html.DisplayFor(m => m.Price)
+            }
+            <sub>/ month</sub>
+        </h3>
+
+        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+    </div>
+    <div class="pricing-box-content ">
+        <ul>
+            <li>
+                <i class="fa fa-download"></i>
+                @Html.LabelFor(m => m.DownloadSpeed)
+                @if (ViewBag.Title == "Edit subscription")
+                {
+                    @Html.EditorFor(m => m.DownloadSpeed, new { Value = Model.DownloadSpeed })
+                    @Html.ValidationMessageFor(m => m.DownloadSpeed, "", new { @class = "text-danger" })
+                }
+                else if (ViewBag.Title == "Create subscription")
+                {
+                    @Html.EditorFor(m => m.DownloadSpeed)
+                    @Html.ValidationMessageFor(m => m.DownloadSpeed, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <span>
+                        @Html.DisplayFor(m => m.DownloadSpeed)
+                    </span>
+                    @:Mbps
+                }
+            </li>
+            <li>
+                <i class="fa fa-upload"></i>
+                @Html.LabelFor(m => m.UploadSpeed)
+                @if (ViewBag.Title == "Edit subscription")
+                {
+                    @Html.EditorFor(m => m.UploadSpeed, new { Value = Model.UploadSpeed })
+                    @Html.ValidationMessageFor(m => m.UploadSpeed, "", new { @class = "text-danger" })
+                }
+                else if (ViewBag.Title == "Create subscription")
+                {
+                    @Html.EditorFor(m => m.UploadSpeed)
+                    @Html.ValidationMessageFor(m => m.UploadSpeed, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <span>
+                        @Html.DisplayFor(m => m.UploadSpeed)
+                    </span>
+                    @:Mbps
+                }
+            </li>
+            <li>
+                <i class="fa fa-info" style="width: 18px; text-align: center"></i>
+                @Html.LabelFor(m => m.Description)
+                <p class="lateral-padding">
+                    @if (ViewBag.Title == "Edit subscription")
+                    {
+                        @Html.EditorFor(m => m.Description, new { Value = Model.Description })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                    }
+                    else if (ViewBag.Title == "Create subscription")
+                    {
+                        @Html.EditorFor(m => m.Description, new { Value = string.Empty })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(m => m.Description)
+                    }
+                </p>
+
+            </li>
+        </ul>
+
+
+    </div>
+    <div class="pricing-box-footer">
+        @if (ViewBag.Title == "Details")
+        {
+            <button id="ShowClients" class="button button-flat-primary button-large margin-10">Show clients</button>
+        }
+        @if (ViewBag.Title == "Services")
+        {
+            <a href="@Url.Action("RequestSubscription", "Subscription", new { Area = "", id = Model.Id })" class="button button-flat-primary button-large margin-10">Order now</a>
+        }
+        @if (ViewBag.Title == "Create subscription")
+        {
+            <button type="submit" class="button button-flat-primary button-large margin-10">
+                <i class="fa fa-upload">
+                    Add
+                </i>
+            </button>
+        }
+
+    </div>
+
+</div>

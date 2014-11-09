@@ -1,0 +1,31 @@
+﻿@model TeraNetSystem.Web.Models.SubscriptionViewModel
+
+@{
+    ViewBag.Title = "Delete subscription";
+}
+<div class="admin-panel">
+    <div class="row">
+        @Html.Partial("_SubscriptionPartial")
+        </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color row">
+            <button class="button button-rounded button-flat-caution" type="submit">
+                <i class=" fa fa-warning no-margin no-padding">
+                    Delete
+                </i>
+            </button>
+            <a class="button button-rounded button-flat-primary" href="@Url.Action("ListSubscriptions", "Subscription")">
+                Cancel
+            </a>
+        </div>
+    }
+</div>
+
+
+
+
+

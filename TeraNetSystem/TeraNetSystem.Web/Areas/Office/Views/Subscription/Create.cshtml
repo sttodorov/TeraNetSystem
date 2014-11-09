@@ -1,0 +1,14 @@
+﻿@model TeraNetSystem.Web.Models.SubscriptionViewModel
+
+@{
+    ViewBag.Title = "Create subscription";
+}
+@using (Html.BeginForm("Create", "Subscription", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="row">
+        @Html.Partial("_SubscriptionPartial")
+    </div>
+    <a class="button button-rounded button-flat-caution button-large" href=" @Url.Action("ListSubscriptions", "Subscription") ">
+        Back to list
+    </a>
+}

@@ -28,13 +28,28 @@ namespace TeraNetSystem.Data.Migrations
         {
             if (!context.Towns.Any())
             {
-                context.Towns.Add(new Town() { TownName = "Sofia"});
+                context.Towns.Add(new Town() { TownName = "Sofia" });
                 context.Towns.Add(new Town() { TownName = "Plovdiv" });
                 context.SaveChanges();
             }
             if (!context.Subscriptions.Any())
             {
-                context.Subscriptions.Add(new Subscription() { SubscriptionName = "Default", MB = 50, Price = 20.00m, Description = "Default Subscription. With 50Mb download speed and #0Mb upload speed! Unlimeted usage!" });
+                context.Subscriptions.Add(new Subscription() 
+                {
+                    SubscriptionName = "Default",
+                    DownloadSpeed = 50,
+                    UploadSpeed = 35,
+                    Price = 20.00m,
+                    Description = "Default Subscription. With 50Mb download speed and #0Mb upload speed! Unlimeted usage!" 
+                });
+                context.Subscriptions.Add(new Subscription()
+                {
+                    SubscriptionName = "Business",
+                    DownloadSpeed = 100,
+                    UploadSpeed = 75,
+                    Price = 50.00m,
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                });
             }
 
             if (!context.Roles.Any())
@@ -110,7 +125,7 @@ namespace TeraNetSystem.Data.Migrations
                 {
                     Town = sofiaTownFromDb,
                     Address = "Studentski grad, 8mi Dekemvri",
-                    Phone="0877111222"
+                    Phone = "0877111222"
                 };
 
                 context.Offices.Add(anotherOffice);
@@ -124,9 +139,9 @@ namespace TeraNetSystem.Data.Migrations
 
                 context.Payments.Add(new Payment()
                 {
-                        Client = admin,
-                        Office = officeFromDb,
-                        PerMonth = Month.April,
+                    Client = admin,
+                    Office = officeFromDb,
+                    PerMonth = Month.April,
                 });
 
                 context.Payments.Add(new Payment()

@@ -45,10 +45,25 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { Area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Services", "All", "Services", new { Area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Contact", "AllOffices", "Contact", new { Area = string.Empty }, null)</li>
+                    @if (User.IsInRole("Office"))
+                    {
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Office</a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Office" }, null)</li>
+                            </ul>
+                        </li>
+                    }
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
-                        <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
+                                <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
+                                <li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Office" }, null)</li>
+                            </ul>
+                        </li>
                     }
                 </ul>
             </div><!-- navbar-collapse -->
@@ -59,10 +74,10 @@
         {
             <div class="PanelNotificationBox PanelError">@TempData["Error"]</div>
         }
-        @*@if (@TempData["Success"] != null)
+        @if (@TempData["Success"] != null)
         {
             <div class="PanelNotificationBox PanelSuccess">@TempData["Success"]</div>
-        }*@
+        }
 
         @RenderBody()
     </div>

@@ -1,0 +1,68 @@
+﻿@model TeraNetSystem.Web.Areas.Office.Models.OfficeSubscriptionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="admin-panel">
+    <div class="row">
+        @Html.Partial("_SubscriptionPartial")
+
+        <div id="SubscriptionLastClients" class="col-lg-6 col-lg-offset-1 no-padding panel panel-default hide">
+            <div class="panel-heading">
+                @if (@Model.Users.Count == 0)
+                {
+                    <h3>No Clients</h3>
+                }
+                else
+                {
+                    <h3>Latest 3 form @Model.Users.Count</h3>
+                }
+            </div>
+            <div class="panel-body">
+                @foreach (var client in Model.Users.OrderByDescending(a => a.RegisteredFrom).Take(5))
+                {
+                    <ul class="list-unstyled row margin-10">
+                        <li>
+                            @Html.LabelFor(m => client.RegisteredFrom)
+                            @Html.DisplayFor(m => client.RegisteredFrom)
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => client.UserName)
+                            @Html.DisplayFor(m => client.UserName)
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => client.TownName)
+                            @Html.DisplayFor(m => client.TownName)
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <a class="button button-rounded button-flat-caution button-large" href="@Url.Action("ListSubscriptions", "Subscription")">
+        Back to list
+    </a>
+
+    
+</div>
+
+@section scripts
+{
+    <script>
+        $('#ShowClients').click(function () {
+            var $this = $(this);
+            var $paymentBox = $('#SubscriptionLastClients');
+
+            if ($paymentBox.hasClass('hide')) {
+                $paymentBox.removeClass('hide');
+                $this.text('Hide clients');
+            } else {
+                $paymentBox.addClass('hide');
+                $this.text('Show clients');
+            }
+        });
+    </script>
+}
+

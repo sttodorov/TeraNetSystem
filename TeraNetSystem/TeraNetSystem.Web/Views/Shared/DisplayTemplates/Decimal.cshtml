@@ -1,0 +1,6 @@
+﻿@model decimal
+@{
+    IFormatProvider formater = new  System.Globalization.CultureInfo("en-US");
+}
+
+@string.Format(formater,"{0:C2}", @Model)

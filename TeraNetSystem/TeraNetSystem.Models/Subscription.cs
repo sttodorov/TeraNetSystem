@@ -22,7 +22,10 @@
         public string SubscriptionName { get; set; }
 
         [Required]
-        public int MB { get; set; }
+        public int DownloadSpeed { get; set; }
+
+        [Required]
+        public int UploadSpeed { get; set; }
 
         [Required]
         public decimal Price { get; set; }

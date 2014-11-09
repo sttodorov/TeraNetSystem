@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Areas.Office.Models.OfficeSubscriptionViewModel>
+@{
+    ViewBag.Title = "List Subscriptions";
+}
+
+<div class="admin-panel">
+    <h2>@ViewBag.Title</h2>
+    @for (int i = 1; i <= ViewBag.Pages; i++)
+    {
+        <a class="button button-flat button-circle" href="@Url.Action("ListSubscriptions", new { id = i })">@i</a>
+    }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var currnetSubscription in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(t => currnetSubscription.Id)</td>
+                    <td>@Html.DisplayFor(t => currnetSubscription.SubscriptionName)</td>
+                    <td>@Html.DisplayFor(t => currnetSubscription.Price)</td>
+                    <td>
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Details", "Subscription", new { id = currnetSubscription.Id})">
+                            <i class="fa fa-info">
+                                Details
+                            </i>
+                        </a>
+
+                    </td>
+                    <td>
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Edit", "Subscription", new { id = currnetSubscription.Id })">
+                            <i class="fa fa-refresh">
+                                Edit
+                            </i>
+                        </a>
+
+                    </td>
+                    <td>
+                        <a class="button button-rounded button-flat-caution" href="@Url.Action("Delete", "Subscription", new { id = currnetSubscription.Id })">
+                            <i class=" fa fa-warning">
+                                Delete
+                            </i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("Create", "Subscription")" class="button button-block button-rounded button-primary button-large">Add subscription plan</a>
+
+</div>
