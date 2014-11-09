@@ -1,0 +1,55 @@
+﻿@model TeraNetSystem.Web.Models.ServiceRequestModel
+@{
+    ViewBag.Title = "Create request";
+}
+
+<div class="admin-panel">
+    <h2 class="animated fadeInDown animation-delay-3">
+        @ViewBag.Title
+    </h2>
+    <div class="panel panel-primary animated fadeInDown col-lg-6 no-padding">
+        <div class="panel-heading">Register Form</div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Request", "Services", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal lateral-padding" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.SubscriptionId)
+                <div class="form-group">
+                    <span class="col-lg-3">@Html.LabelFor(m => m.TownId)</span>
+                    <div class="controls">
+                        @Html.DropDownListFor(m => m.TownId, Model.Towns)
+                    </div>
+                    @Html.ValidationMessageFor(m => m.TownId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-3">@Html.LabelFor(m => m.Address)</span>
+                    @Html.EditorFor(m => m.Address, new { Value =string.Empty})
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-3">@Html.LabelFor(m => m.FirstName)</span>
+                    @Html.EditorFor(m => m.FirstName)
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-3">@Html.LabelFor(m => m.LastName)</span>
+                    @Html.EditorFor(m => m.LastName)
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <span class="col-lg-3">@Html.LabelFor(m => m.Phone)</span>
+                    <div class="controls">
+                        @Html.EditorFor(m => m.Phone)
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <span class="col-md-3">
+                        <button type="submit" class="btn btn-ar btn-primary">Send request</button>
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

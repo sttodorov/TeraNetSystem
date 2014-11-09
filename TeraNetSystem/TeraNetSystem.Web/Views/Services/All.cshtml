@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Models.SubscriptionViewModel>
+@{
+    ViewBag.Title = "Services";
+}
+<div class="admin-panel">
+
+    <h2>
+        @ViewBag.TItle
+    </h2>
+    @foreach (var service in @Model)
+    {
+        @Html.Partial("_SubscriptionPartial", service)
+
+    }
+    <span>.</span>
+</div>

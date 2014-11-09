@@ -1,11 +1,11 @@
 ﻿@model TeraNetSystem.Web.Models.SubscriptionViewModel
-
-
+@if (ViewBag.Title != "Services")
+{
     <h2>
         @ViewBag.Title
     </h2>
-
-<div class="pricign-box col-md-4 no-padding">
+}
+<div class="pricign-box col-lg-4 no-padding" style="margin:10px;width:360px">
     <div class="pricing-box-header">
 
         @if (ViewBag.Title == "Create subscription")
@@ -33,9 +33,10 @@
             else if (ViewBag.Title == "Create subscription")
             {
                 @:</h3>
+            
                 @Html.LabelFor(m => m.Price)
                 @:<h3>
-                @Html.EditorFor(m => m.Price)
+                    @Html.EditorFor(m => m.Price)
             }
             else
             {
@@ -106,7 +107,11 @@
                     }
                     else
                     {
+                        @:<div class="lateral-padding" style="overflow:auto;height:100px">
                         @Html.DisplayFor(m => m.Description)
+                        @:</div>
+                
+                        
                     }
                 </p>
 
@@ -122,7 +127,7 @@
         }
         @if (ViewBag.Title == "Services")
         {
-            <a href="@Url.Action("RequestSubscription", "Subscription", new { Area = "", id = Model.Id })" class="button button-flat-primary button-large margin-10">Order now</a>
+            <a href="@Url.Action("Request", "Services", new { Area = "", id = Model.Id })" class="button button-flat-primary button-large margin-10">Order now</a>
         }
         @if (ViewBag.Title == "Create subscription")
         {
