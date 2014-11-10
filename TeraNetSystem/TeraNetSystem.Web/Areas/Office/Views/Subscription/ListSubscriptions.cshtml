@@ -7,7 +7,7 @@
     <h2>@ViewBag.Title</h2>
     @for (int i = 1; i <= ViewBag.Pages; i++)
     {
-        <a class="button button-flat button-circle" href="@Url.Action("ListSubscriptions", new { id = i })">@i</a>
+        <a class="button button-flat@( i==ViewBag.PageNumber ? "-primary" : "") button-circle" href="@Url.Action("ListRequests", new { id = i })">@i</a>
     }
     <table class="table table-hover">
         <thead>
@@ -55,5 +55,4 @@
         </tbody>
     </table>
     <a href="@Url.Action("Create", "Subscription")" class="button button-block button-rounded button-primary button-large">Add subscription plan</a>
-
 </div>

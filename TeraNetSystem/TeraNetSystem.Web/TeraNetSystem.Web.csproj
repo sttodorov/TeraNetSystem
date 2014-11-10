@@ -181,8 +181,10 @@
     <Compile Include="Areas\Administration\Models\AdminOfficeViewModel.cs" />
     <Compile Include="Areas\Administration\Models\TownCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
+    <Compile Include="Areas\Office\Controllers\RequestController.cs" />
     <Compile Include="Areas\Office\Controllers\SubscriptionController.cs" />
     <Compile Include="Areas\Office\Models\OfficeSubscriptionViewModel.cs" />
+    <Compile Include="Areas\Office\Models\RequestViewModel.cs" />
     <Compile Include="Areas\Office\OfficeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -323,6 +325,7 @@
     <Content Include="Areas\Office\Views\Subscription\Edit.cshtml" />
     <Content Include="Areas\Office\Views\Subscription\Delete.cshtml" />
     <Content Include="Areas\Office\Views\Subscription\Create.cshtml" />
+    <Content Include="Areas\Office\Views\Request\ListRequests.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

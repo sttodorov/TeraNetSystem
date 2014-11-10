@@ -53,6 +53,10 @@
 
         public virtual Subscription Subscription { get; set; }
 
+        public string OfficeId { get; set; }
+
+        public virtual Office Office { get; set; }
+
         public virtual ICollection<Payment> Payments
         {
             get

@@ -39,6 +39,8 @@
                              .ToList();
 
             ViewBag.Pages = Math.Ceiling((double)allTowns.Count() / PageSize);
+            ViewBag.PageNumber = pageNumber;
+
             return View(pageTowns);
         }
 

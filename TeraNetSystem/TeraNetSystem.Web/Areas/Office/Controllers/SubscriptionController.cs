@@ -33,6 +33,8 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
                             .Select(OfficeSubscriptionViewModel.FromSubscription);
 
             ViewBag.Pages = Math.Ceiling((double)allSubscriptions.Count() / PageSize);
+            ViewBag.PageNumber = pageNumber;
+
             return View(pageSubscriptions);
         }
 

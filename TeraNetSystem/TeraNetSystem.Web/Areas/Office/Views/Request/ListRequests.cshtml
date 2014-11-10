@@ -1,0 +1,41 @@
+﻿@using TeraNetSystem.Web.Areas.Office.Models;
+@model IEnumerable<RequestViewModel>
+
+@{
+    ViewBag.Title = "List requests";
+}
+
+<div class="admin-panel">
+    <h2>@ViewBag.Title</h2>
+    @for (int i = 1; i <= ViewBag.Pages; i++)
+    {
+        <a class="button button-flat@( i==ViewBag.PageNumber ? "-primary" : "") button-circle" href="@Url.Action("ListRequests", new { id = i })">@i</a>
+    }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Town</th>
+                <th>Client</th>
+                <th>Subscription plan</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var currnetSubscription in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(t => currnetSubscription.TownName)</td>
+                    <td>@Html.DisplayFor(t => currnetSubscription.FullName)</td>
+                    <td>@Html.DisplayFor(t => currnetSubscription.SubscriptionName)</td>
+                    <td>
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Details", "Request", new { id = currnetSubscription.Id})">
+                            <i class="fa fa-info">
+                                Details
+                            </i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

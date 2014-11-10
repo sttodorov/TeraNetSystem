@@ -8,16 +8,21 @@
     public class Office : IEntityProtectedDelete
     {
         private ICollection<Payment> payments;
+        private ICollection<ApplicationUser> staff;
 
         public Office()
             :base()
         {
             this.Id = Guid.NewGuid();
             this.Payments = new HashSet<Payment>();
+            this.Staff = new HashSet<ApplicationUser>();
             this.IsDeleted = false;
         }
 
         public Guid Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
 
         //[Required]
         public int TownId { get; set; }
@@ -35,6 +40,18 @@
         //[Required]
         [DefaultValue("~/Content/images/office.png")]
         public string ImagePath { get; set; }
+
+        public virtual ICollection<ApplicationUser> Staff
+        {
+            get
+            {
+                return this.staff;
+            }
+            set
+            {
+                this.staff = value;
+            }
+        }
 
         public virtual ICollection<Payment> Payments
         {

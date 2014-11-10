@@ -51,6 +51,30 @@ namespace TeraNetSystem.Data.Migrations
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                 });
             }
+            if (!context.Offices.Any())
+            {
+                var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
+
+                var newOffice = new Office()
+                {
+                    Name= "Mladost 1",
+                    Town = sofiaTownFromDb,
+                    Address = "Maldost, Atanas Manchev 122",
+                    Phone = "0888555444"
+                };
+                context.Offices.Add(newOffice);
+
+                var anotherOffice = new Office()
+                {
+                    Name = "Student town",
+                    Town = sofiaTownFromDb,
+                    Address = "Student town, 8th December 63",
+                    Phone = "0877111222"
+                };
+
+                context.Offices.Add(anotherOffice);
+                context.SaveChanges();
+            }
 
             if (!context.Roles.Any())
             {
@@ -69,6 +93,7 @@ namespace TeraNetSystem.Data.Migrations
 
                 var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
                 var defaultSubscription = context.Subscriptions.FirstOrDefault(a => a.SubscriptionName == "Default");
+                var sofiaOffice = context.Offices.FirstOrDefault(a => a.Name == "Mladost 1");
 
                 var administartor = new ApplicationUser()
                 {
@@ -78,7 +103,8 @@ namespace TeraNetSystem.Data.Migrations
                     LastName = ADMIN_ROLE,
                     Town = sofiaTownFromDb,
                     Address = "Vitosha str. 18",
-                    Subscription = defaultSubscription
+                    Subscription = defaultSubscription,
+                    Office = sofiaOffice
                 };
                 userManager.Create(administartor, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(administartor.Id, ADMIN_ROLE);
@@ -91,7 +117,8 @@ namespace TeraNetSystem.Data.Migrations
                     LastName = OFFICE_ROLE,
                     Town = sofiaTownFromDb,
                     Address = "Vitosha str. 18",
-                    Subscription = defaultSubscription
+                    Subscription = defaultSubscription,
+                    Office = sofiaOffice
                 };
                 userManager.Create(officeMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(officeMan.Id, OFFICE_ROLE);
@@ -108,29 +135,6 @@ namespace TeraNetSystem.Data.Migrations
                 };
                 userManager.Create(networkMan, DEFAULT_SEED_PASSWORD);
                 userManager.AddToRole(networkMan.Id, NETWORK_ROLE);
-            }
-            if (!context.Offices.Any())
-            {
-                var sofiaTownFromDb = context.Towns.FirstOrDefault(t => t.TownName == "Sofia");
-
-                var newOffice = new Office()
-                {
-                    Town = sofiaTownFromDb,
-                    Address = "Maldost, Atanas Manchev 122",
-                    Phone = "0888555444"
-                };
-                context.Offices.Add(newOffice);
-
-                var anotherOffice = new Office()
-                {
-                    Town = sofiaTownFromDb,
-                    Address = "Studentski grad, 8mi Dekemvri",
-                    Phone = "0877111222"
-                };
-
-                context.Offices.Add(anotherOffice);
-
-                context.SaveChanges();
             }
             if (!context.Payments.Any())
             {

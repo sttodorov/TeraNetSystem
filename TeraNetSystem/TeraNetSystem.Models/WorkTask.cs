@@ -13,11 +13,15 @@
             this.IsDeleted = false;
         }
         public Guid Id { get; set; }
+        
+        public int TownId { get; set; }
+
+        public virtual Town Town { get; set; }
 
         [Required]
         [MinLength(5)]
         [MaxLength(50)]
-        public string Location { get; set; }
+        public string Address { get; set; }
 
         [Required]
         [MinLength(10)]

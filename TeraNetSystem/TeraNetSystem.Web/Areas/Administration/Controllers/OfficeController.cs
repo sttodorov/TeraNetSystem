@@ -35,6 +35,8 @@
                             .ToList();
 
             ViewBag.Pages = Math.Ceiling((double)allOffices.Count() / PageSize);
+            ViewBag.PageNumber = pageNumber;
+
             return View(pageOffices);
         }
 
