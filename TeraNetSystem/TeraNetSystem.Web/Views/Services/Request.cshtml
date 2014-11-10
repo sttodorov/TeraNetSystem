@@ -1,4 +1,6 @@
-﻿@model TeraNetSystem.Web.Models.ServiceRequestModel
+﻿@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc.Models
+@model TeraNetSystem.Web.Models.ServiceRequestModel
 @{
     ViewBag.Title = "Create request";
 }
@@ -23,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <span class="col-lg-3">@Html.LabelFor(m => m.Address)</span>
-                    @Html.EditorFor(m => m.Address, new { Value =string.Empty})
+                    @Html.EditorFor(m => m.Address, new { Value = string.Empty })
                     @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
@@ -42,6 +44,20 @@
                         @Html.EditorFor(m => m.Phone)
                     </div>
                     @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Hidden(MvcApplication.MultipleParameterKey, 2)
+                    <div class="row">
+                        
+                        <span class="col-lg-3">
+                            @Html.LabelFor(m => m.RequstCaptcha)
+                        </span>
+                        <span class="col-lg-6">
+                            @Html.Captcha("Generate new code", "Enter code here", 5, new ParameterModel(MvcApplication.MultipleParameterKey, 1))
+                        </span>
+                    </div>
+                    
+                    @Html.ValidationMessageFor(m => m.RequstCaptcha, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">

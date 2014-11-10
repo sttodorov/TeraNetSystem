@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaptchaMvc.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,7 @@ namespace TeraNetSystem.Web.Controllers
         public ActionResult Request(int? id)
         {
             var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice).ToList();
+
             var serviceId = id.GetValueOrDefault(1);
 
             var selectedList = new List<SelectListItem>();
@@ -42,7 +44,7 @@ namespace TeraNetSystem.Web.Controllers
             return View(createModel);
         }
 
-        [HttpPost]
+        [HttpPost, CaptchaVerify("Code is not valid")]
         [ValidateAntiForgeryToken]
         public ActionResult Request(ServiceRequestModel request)
         {
@@ -64,6 +66,23 @@ namespace TeraNetSystem.Web.Controllers
 
                 TempData["Success"] = String.Format("Request for {0} subscription plan has been successfully send! We will call you in few days!",
                                                     this.Data.Subscriptions.All().FirstOrDefault(s=>s.Id==createdRequest.SubscriptionId).SubscriptionName);                
+            }
+            else
+            {
+                var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice).ToList();
+
+                var selectedList = new List<SelectListItem>();
+
+                foreach (var item in towns)
+                {
+                    selectedList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+                }
+                request.Towns = selectedList;
+                request.RequstCaptcha = string.Empty;
+
+                TempData["Error"] = "Wrong validation code! Please enter code again!";
+
+                return View(request);
             }
 
             return RedirectToAction("All");

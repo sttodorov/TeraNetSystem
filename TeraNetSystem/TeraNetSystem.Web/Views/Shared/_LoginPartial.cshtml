@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", new { Area = string.Empty }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
         <div class="dropdown animated fadeInDown">
-            @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Profile", "Index", "Manage", new { Area = string.Empty }, htmlAttributes: new { title = "Manage" })
         </div>
         <div class="dropdown animated fadeInDown">
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
@@ -15,7 +15,7 @@
 else
 {
     <div class="dropdown animated fadeInDown">
-        <a href="@Url.Action("Login", "Account", routeValues: null)">
+        <a href="@Url.Action("Login", "Account", new { Area = string.Empty})">
             <i class="fa fa-user"></i>
             Log in
         </a>
