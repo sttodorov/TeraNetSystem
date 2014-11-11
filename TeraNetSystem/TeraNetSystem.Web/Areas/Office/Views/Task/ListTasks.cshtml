@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Areas.Office.Models.TaskViewModel>
+@{
+    ViewBag.Title = "List tasks";
+}
+
+
+<div class="margin-50">
+    <h2>@ViewBag.Title</h2>
+    @if (@Model.Count() == 0)
+    {
+        <h1 class="text-center text-info">No pending tasks!</h1>
+    }
+    else
+    {
+        <div class="row">
+            @for (int i = 1; i <= ViewBag.Pages; i++)
+            {
+                <a class="button button-flat@( i==ViewBag.PageNumber ? "-primary" : "") button-circle" href="@Url.Action("ListTasks", new { id = i })">@i</a>
+            }
+        </div>
+        foreach (var task in Model)
+        {
+            @Html.Partial("_TaskPartial", task)
+        }
+    }
+</div>

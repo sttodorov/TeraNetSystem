@@ -1,0 +1,18 @@
+﻿@model TeraNetSystem.Web.Areas.Office.Models.TaskViewModel
+@{
+    ViewBag.Title = "Edit task";
+}
+
+<div class="admin-panel">
+    <h2>
+        @ViewBag.Title
+    </h2>
+    <div class="row">
+        @using (Html.BeginForm("Edit", "Task", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_TaskPartial")
+        }
+    </div>
+
+</div>

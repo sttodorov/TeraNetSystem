@@ -30,7 +30,7 @@
             var currentUserId = this.User.Identity.GetUserId();
             var currentOfficeTownId = this.Data.Users.All().FirstOrDefault(u => u.Id == currentUserId).TownId;
 
-            var requestForCurrentTown = this.Data.Requests.All().Where(r => r.TownId == currentOfficeTownId);
+            var requestForCurrentTown = this.Data.Requests.All().Where(r => r.TownId == currentOfficeTownId && r.Approved == false);
 
             var requestsPage = requestForCurrentTown.OrderBy(x => x.Id)
                              .Skip((pageNumber - 1) * PageSize)
@@ -89,7 +89,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectedRequestsAsTask = this.Data.Requests.All().Select(TaskCreateViewModel.FromRequest).FirstOrDefault(t => t.Id.ToString() == id);
+            var selectedRequestsAsTask = this.Data.Requests.All().Select(TaskViewModel.FromRequest).FirstOrDefault(t => t.Id.ToString() == id);
 
             var networkersForCurrentTown = this.Data.Users.All().Where(u => u.Town.TownName == selectedRequestsAsTask.TownName).ToList();
             var networkersList = new List<SelectListItem>();
@@ -100,6 +100,9 @@
             }
 
             selectedRequestsAsTask.Netwrokers = networkersList;
+
+            this.Data.Requests.All().FirstOrDefault(r => r.Id.ToString() == id).Approved = true;
+            this.Data.SaveChanges();
 
             return View(selectedRequestsAsTask);
         }

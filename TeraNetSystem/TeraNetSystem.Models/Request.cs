@@ -9,6 +9,7 @@
         {
             this.Id = Guid.NewGuid();
             this.IsDeleted = false;
+            this.Approved = false;
         }
 
         public Guid Id { get; set; }
@@ -40,6 +41,8 @@
 
         [Required]
         public string PhoneNumber { get; set; }
+
+        public bool Approved { get; set; }
 
         public bool IsDeleted { get; set; }
 

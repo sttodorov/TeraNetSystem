@@ -1,4 +1,4 @@
-﻿@model TeraNetSystem.Web.Areas.Office.Models.TaskCreateViewModel
+﻿@model TeraNetSystem.Web.Areas.Office.Models.TaskViewModel
 @{
     ViewBag.Title = "Transfer requst to task";
 }
@@ -8,8 +8,11 @@
         @ViewBag.Title
     </h2>
     <div class="row">
-        @Html.Partial("_TaskPartial")
-
+        @using (Html.BeginForm("Create", "Task", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_TaskPartial")
+        }
     </div>
 
     <a class="button button-rounded button-flat-caution button-large" href="@Url.Action("ListRequests", "Request")">

@@ -7,7 +7,7 @@
     {
         public WorkTask()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.DateCreated = DateTime.Now;
             this.Compleated = false;
             this.IsDeleted = false;
