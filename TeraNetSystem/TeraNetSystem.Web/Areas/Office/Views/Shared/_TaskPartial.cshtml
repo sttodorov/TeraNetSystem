@@ -1,0 +1,49 @@
+﻿@model TeraNetSystem.Web.Areas.Office.Models.TaskCreateViewModel
+
+<div class="content-box box-default margin-top col-lg-8">
+    <div class="row">
+        <h4>@Html.DisplayFor(m => m.Id)</h4>
+        @using (Html.BeginForm("Create", "Task", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            <ul class="list-unstyled text-left col-lg-offset-1">
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.NetworkerId)</span>
+                    @Html.DropDownListFor(m => m.NetworkerId, Model.Netwrokers, new { @class=  "form-control"})
+                </li>
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.TownName)</span>
+                    @Html.DisplayFor(m => m.TownName, new { Value = Model.TownName })
+                </li>
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Address)</span>
+                    @Html.DisplayFor(m => m.Address, new { Value = Model.Address })
+                </li>
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Description)</span>
+                    @Html.EditorFor(m => m.Description, new { Value = string.Empty })
+                </li>
+                @*<li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.FullName)</span>
+                    @Html.EditorFor(m => m.FullName, new { Value = Model.FullName })
+                </li>
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.SubscriptionName)</span>
+                    @Html.EditorFor(m => m.SubscriptionName, new { Value = Model.SubscriptionName })
+                </li>
+                <li class="row margin-10">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.PhoneNumber)</span>
+                    @Html.EditorFor(m => m.PhoneNumber, new { Value = Model.PhoneNumber })
+                </li>*@
+            </ul>
+            <div class="row margin-10">
+                <button class="button button-rounded button-flat-primary" type="submit">
+                    <i class=" fa fa-upload no-margin no-padding">
+                        Send task
+                    </i>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+

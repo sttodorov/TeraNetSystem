@@ -1,0 +1,18 @@
+﻿@model TeraNetSystem.Web.Areas.Office.Models.TaskCreateViewModel
+@{
+    ViewBag.Title = "Transfer requst to task";
+}
+
+<div class="admin-panel">
+    <h2>
+        @ViewBag.Title
+    </h2>
+    <div class="row">
+        @Html.Partial("_TaskPartial")
+
+    </div>
+
+    <a class="button button-rounded button-flat-caution button-large" href="@Url.Action("ListRequests", "Request")">
+        Back to list
+    </a>
+</div>

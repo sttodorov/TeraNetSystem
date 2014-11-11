@@ -183,8 +183,10 @@
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
     <Compile Include="Areas\Office\Controllers\RequestController.cs" />
     <Compile Include="Areas\Office\Controllers\SubscriptionController.cs" />
+    <Compile Include="Areas\Office\Controllers\TaskController.cs" />
     <Compile Include="Areas\Office\Models\OfficeSubscriptionViewModel.cs" />
     <Compile Include="Areas\Office\Models\RequestViewModel.cs" />
+    <Compile Include="Areas\Office\Models\TaskCreateViewModel.cs" />
     <Compile Include="Areas\Office\OfficeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -326,6 +328,10 @@
     <Content Include="Areas\Office\Views\Subscription\Delete.cshtml" />
     <Content Include="Areas\Office\Views\Subscription\Create.cshtml" />
     <Content Include="Areas\Office\Views\Request\ListRequests.cshtml" />
+    <Content Include="Areas\Office\Views\Request\Details.cshtml" />
+    <Content Include="Areas\Office\Views\Shared\_RequestPartial.cshtml" />
+    <Content Include="Areas\Office\Views\Request\Transfer.cshtml" />
+    <Content Include="Areas\Office\Views\Shared\_TaskPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -392,6 +398,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Office\Views\Task\" />
     <Folder Include="Files\news\" />
     <Folder Include="Files\offices\" />
     <Folder Include="Views\Payments\" />

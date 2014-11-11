@@ -19,7 +19,8 @@
 
         public IQueryable<T> All()
         {
-            return this.context.SetEntity<T>().AsParallel().Where(c => c.IsDeleted == false).AsQueryable();
+            //return this.context.SetEntity<T>().AsParallel().Where(c => c.IsDeleted == false).AsQueryable();
+            return this.context.SetEntity<T>().Where(c => c.IsDeleted == false);
         }
 
         public IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions)

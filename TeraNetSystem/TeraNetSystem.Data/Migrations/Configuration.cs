@@ -60,7 +60,8 @@ namespace TeraNetSystem.Data.Migrations
                     Name= "Mladost 1",
                     Town = sofiaTownFromDb,
                     Address = "Maldost, Atanas Manchev 122",
-                    Phone = "0888555444"
+                    Phone = "0888555444",
+                    ImagePath = "~/Content/images/office.png"
                 };
                 context.Offices.Add(newOffice);
 
@@ -69,7 +70,8 @@ namespace TeraNetSystem.Data.Migrations
                     Name = "Student town",
                     Town = sofiaTownFromDb,
                     Address = "Student town, 8th December 63",
-                    Phone = "0877111222"
+                    Phone = "0877111222",
+                    ImagePath = "~/Content/images/office.png"
                 };
 
                 context.Offices.Add(anotherOffice);

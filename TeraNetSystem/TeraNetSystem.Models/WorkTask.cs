@@ -36,8 +36,7 @@
 
         public DateTime? DateCompleated { get; set; }
 
-        [Required]
-        public int  NetworkManId { get; set; }
+        public string  NetworkManId { get; set; }
 
         public virtual ApplicationUser NetworkMan { get; set; }
 

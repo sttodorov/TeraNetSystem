@@ -1,0 +1,17 @@
+﻿@using TeraNetSystem.Web.Areas.Office.Models
+@model RequestViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="admin-panel">
+    <div class="row">
+        @Html.Partial("_RequestPartial")
+
+    </div>
+
+    <a class="button button-rounded button-flat-caution button-large" href="@Url.Action("ListRequests", "Request")">
+        Back to list
+    </a>
+</div>

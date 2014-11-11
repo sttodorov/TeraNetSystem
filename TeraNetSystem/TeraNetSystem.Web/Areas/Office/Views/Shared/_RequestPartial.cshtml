@@ -1,0 +1,56 @@
+﻿@using TeraNetSystem.Web.Areas.Office.Models
+@model RequestViewModel
+
+<h2>
+    @ViewBag.Title
+</h2>
+
+<div class="content-box box-default margin-top col-lg-6">
+    <div class="row">
+            <h4>@Html.DisplayFor(m => m.Id)</h4>
+            <ul class="list-unstyled text-left col-lg-offset-1">
+                <li class="row">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.TownName)</span>
+                    @Html.DisplayFor(m => m.TownName)
+                </li>
+                <li class="row">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Address)</span>
+                    @Html.DisplayFor(m => m.Address)
+                </li>
+                <li class="row">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.FullName)</span>
+                    @Html.DisplayFor(m => m.FullName)
+                </li>
+                <li class="row">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.SubscriptionName)</span>
+                    @Html.DisplayFor(m => m.SubscriptionName)
+                </li>
+                <li class="row">
+                    <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.PhoneNumber)</span>
+                    @Html.DisplayFor(m => m.PhoneNumber)
+                </li>
+            </ul>
+            <div class="row text-left">
+                @using (Html.BeginForm("Transfer", "Request", new { id = Model.Id }, FormMethod.Get, new { @class = "form-horizontal" }))
+                {
+                    <span class="col-lg-6 col-lg-offset-1 no-padding">
+                        <button class="button button-rounded button-flat-primary" type="submit">
+                            <i class=" fa fa-warning no-margin no-padding">
+                                Transfer to task
+                            </i>
+                        </button>
+                    </span>
+                }
+                @using (Html.BeginForm("Delete", "Request", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button class="button button-rounded button-flat-caution" type="submit">
+                        <i class=" fa fa-warning no-margin no-padding">
+                            Delete
+                        </i>
+                    </button>
+                }
+               
+            </div>
+    </div>
+</div>
