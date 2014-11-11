@@ -18,6 +18,7 @@ namespace TeraNetSystem.Web.Models
                 return o => new OfficeViewModel
                 {
                     Id = o.Id.ToString(),
+                    Name= o.Name,
                     TownName = o.Town.TownName,
                     Address = o.Address,
                     Phone = o.Phone,
@@ -27,6 +28,12 @@ namespace TeraNetSystem.Web.Models
         }
 
         public string Id { get; set; }
+        
+        [DisplayName("Office name: ")]
+        [Required]
+        [MinLength(5)]
+        [MaxLength(30)]
+        public string Name { get; set; }
 
         [DisplayName("Town:")]
         [Required]

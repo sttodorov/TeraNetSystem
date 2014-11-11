@@ -18,13 +18,23 @@
                 <img src="@Url.Content("~/Content/images/office.png")" alt="OfficeImage" class="img-responsive" id="office-image">
             </div>
             <div class="col-md-8">
-                <h4 class="content-box-title">Office information</h4>
+                <div class="row">
+                    <h4 class="content-box-title">
+                        @Html.LabelFor(m => m.Name)
+                    </h4>
+                </div>
+                <div class="row col-lg-offset-4 margin-bottom">
+                    @Html.EditorFor(m => m.Name)
+                </div>
+
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+
 
                 <ul class="list-unstyled text-left">
                     <li class="row margin-10">
                         <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.TownId)</span>
                         <div class="controls">
-                            @Html.DropDownListFor(m=>m.TownId,Model.Towns)
+                            @Html.DropDownListFor(m => m.TownId, Model.Towns)
                         </div>
                         @Html.ValidationMessageFor(m => m.TownId, "", new { @class = "text-danger" })
                     </li>
@@ -65,7 +75,7 @@
         $('#input-image').on('change', function () {
             var $imgtag = $("#office-image");
             var file = event.target.files[0];
-            
+
             var reader = new FileReader();
 
             $imgtag.title = file.name;

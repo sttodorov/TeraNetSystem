@@ -18,6 +18,12 @@ namespace TeraNetSystem.Web.Areas.Administration.Models
         [Range(1, int.MaxValue)]
         public int TownId { get; set; }
 
+        [DisplayName("Office name: ")]
+        [Required]
+        [MinLength(5)]
+        [MaxLength(30)]
+        public string Name { get; set; }
+
         [DisplayName("Address:")]
         [DataType(DataType.MultilineText)]
         [Required]

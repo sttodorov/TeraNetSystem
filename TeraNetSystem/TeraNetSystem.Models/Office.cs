@@ -22,6 +22,8 @@
         public Guid Id { get; set; }
 
         [Required]
+        [MinLength(5)]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         //[Required]

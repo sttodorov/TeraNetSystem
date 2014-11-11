@@ -12,9 +12,27 @@
             <img src="@Url.Content(Model.ImagePath)" alt="OfficeImage" class="img-responsive" width="250">
         </div>
         <div class="col-md-8">
-            <h4 class="content-box-title">@Html.DisplayFor(m => m.Id)</h4>
+            <div class="row margin-bottom">
+                @Html.LabelFor(m => m.Name)
+                @if (ViewBag.Title == "Edit office")
+                {
+                    <center> @Html.EditorFor(m => m.Name, new { Value = Model.Name })</center>
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <h3 class="margin-bottom ">
+                        @Html.DisplayFor(m => m.Name)
+                    </h3>
+                }
+            </div>
+
 
             <ul class="list-unstyled text-left">
+                <li class="row">
+                    <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Id)</span>
+                    @Html.DisplayFor(m => m.Id)
+                </li>
                 <li class="row">
                     <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.TownName)</span>
                     @Html.DisplayFor(m => m.TownName)
@@ -24,7 +42,7 @@
                     @if (ViewBag.Title == "Edit office")
                     {
                         @Html.EditorFor(m => m.Address, new { Value = Model.Address })
-                        @Html.ValidationMessageFor(m => m.Address, "", new { @class="text-danger"})
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                     }
                     else
                     {

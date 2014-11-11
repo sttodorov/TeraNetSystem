@@ -10,6 +10,7 @@
     using TeraNetSystem.Models;
     using TeraNetSystem.Web.Areas.Administration.Models;
     using TeraNetSystem.Web.Controllers;
+    using TeraNetSystem.Web.Models;
 
     public class OfficeController : BaseController
     {
@@ -28,10 +29,10 @@
 
             var allOffices = this.Data.Offices.All();
 
-            var pageOffices = allOffices.OrderBy(x => x.Id)
+            var pageOffices = allOffices.OrderBy(x => x.Town.TownName)
                             .Skip((pageNumber - 1) * PageSize)
                             .Take(PageSize)
-                            .Select(AdminOfficeViewModel.FromOffice)
+                            .Select(OfficeViewModel.FromOffice)
                             .ToList();
 
             ViewBag.Pages = Math.Ceiling((double)allOffices.Count() / PageSize);
@@ -85,6 +86,7 @@
                 var newOffice = new Office()
                 {
                     TownId = newOfficeModel.TownId,
+                    Name= newOfficeModel.Name,
                     Address = newOfficeModel.Address,
                     Phone = newOfficeModel.Phone,
                     ImagePath = imagePath
@@ -94,7 +96,7 @@
                 this.Data.Offices.Add(newOffice);
                 this.Data.SaveChanges();
 
-                TempData["Success"] = String.Format("Office in {0} added successfully!", newOffice.Town.TownName);
+                TempData["Success"] = String.Format("Office {0} added successfully!", newOffice.Name);
 
             }
 
@@ -143,9 +145,13 @@
         {
             var officeToEdit = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == edditedOffice.Id);
 
+            officeToEdit.Name = edditedOffice.Name;
             officeToEdit.Address = edditedOffice.Address;
             officeToEdit.Phone = edditedOffice.Phone;
+
             this.Data.SaveChanges();
+
+            TempData["Success"] = String.Format("Office {0} updated successfully!", edditedOffice.Name);
 
             return RedirectToAction("ListOffices");
         }
@@ -179,10 +185,10 @@
                 this.Data.Payment.Delete(payment);
             }
 
-
-
             this.Data.Offices.Delete(officeToBeDeleted);
             this.Data.SaveChanges();
+
+            TempData["Success"] = String.Format("Office {0} deleted successfully!", officeToBeDeleted.Name);
 
             return RedirectToAction("ListOffices");
         }
