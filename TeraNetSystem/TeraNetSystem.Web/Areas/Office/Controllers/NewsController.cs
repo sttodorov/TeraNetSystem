@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using TeraNetSystem.Data;
+using TeraNetSystem.Web.Controllers;
+using TeraNetSystem.Web.Models;
+
+namespace TeraNetSystem.Web.Areas.Office.Controllers
+{
+    public class NewsController : BaseController
+    {
+        private const int PageSize = 3;
+        public NewsController(ITeraNetData data)
+            : base(data)
+        {
+        }
+
+        private IQueryable<NewsViewModel> GetNews(int page, int? count = null)
+        {
+            int newsToTake = count != null ? count.GetValueOrDefault(1) : PageSize;
+
+            var allNews = this.Data.News.All();
+            var news = allNews
+                       .Select(NewsViewModel.FromNews)
+                       .OrderByDescending(n => n.DateCreated)
+                       .Skip((page - 1) * PageSize)
+                       .Take(newsToTake);
+
+
+            ViewBag.Pages = Math.Ceiling((double)allNews.Count() / PageSize);
+            ViewBag.PageNumber = page;
+
+            return news;
+        }
+
+        [ChildActionOnly]
+        private ActionResult GetSelectedNews(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var selectedNews = this.Data.News.All().Select(NewsViewModel.FromNews).FirstOrDefault(n => n.Id == id);
+
+            if (selectedNews == null)
+            {
+                TempData["Error"] = string.Format("News with Id {0} NOT FOUND!", id);
+                return RedirectToAction("ListNews");
+            }
+
+            return View(selectedNews);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ListNews(int? page)
+        {
+            var pageNumber = page.GetValueOrDefault(1);
+            pageNumber = pageNumber < 1 ? 1 : pageNumber;
+
+            return View(GetNews(pageNumber));
+        }
+
+        [HttpGet]
+        public ActionResult  LatestNews()
+        {
+            return View(GetNews(1,3));
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            return GetSelectedNews(id);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            return GetSelectedNews(id);            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(NewsViewModel editedNews)
+        {
+            if (editedNews.Title != null && editedNews.Content != null)
+            {
+                var newsToEdit = this.Data.News.All().FirstOrDefault(n => n.Id == editedNews.Id);
+                newsToEdit.Title = editedNews.Title;
+                newsToEdit.Content = editedNews.Content;
+
+                this.Data.SaveChanges();
+                TempData["Success"] = "News editted successfully";
+                return RedirectToAction("ListNews");
+            }
+            else
+            {
+                TempData["Error"] = "Please provide correct information!";
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var selectedNews = this.Data.News.All().FirstOrDefault(n => n.Id == id);
+
+            if (selectedNews == null)
+            {
+                TempData["Erorr"] = String.Format("News woth ID {0} NOT FOUND!",id);
+            }
+            else
+            {
+                this.Data.News.Delete(selectedNews);
+                this.Data.SaveChanges();
+                TempData["Success"] = "News deleted successfully";
+            } 
+
+            return RedirectToAction("ListNews");
+        }
+    }
+}

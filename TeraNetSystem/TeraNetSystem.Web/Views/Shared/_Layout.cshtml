@@ -47,7 +47,7 @@
                     <li>@Html.ActionLink("Contact", "AllOffices", "Contact", new { Area = string.Empty }, null)</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My payments", "ListPayments", "Payment", new { Area = string.Empty }, null)</li>
+                        <li>@Html.ActionLink("My payments", "MyPayments", "ClientPayment", new { Area = string.Empty }, null)</li>
                     }
                     @if (User.IsInRole("NetworkMan") || User.IsInRole("Admin"))
                     {

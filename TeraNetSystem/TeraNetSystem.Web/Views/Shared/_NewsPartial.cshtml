@@ -1,0 +1,115 @@
+﻿@model TeraNetSystem.Web.Models.NewsViewModel
+
+<div class="content-box box-default margin-top">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.ImagePath)" alt="OfficeImage" class="img-responsive" width="250">
+        </div>
+        <div class="col-md-8">
+            <div class="row ">
+                @Html.LabelFor(m => m.Title)
+                @if (ViewBag.Title == "Edit news")
+                {
+                    <center> @Html.EditorFor(m => m.Title, new { Value = Model.Title })</center>
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <h3 class="margin-bottom ">
+                        @Html.DisplayFor(m => m.Title)
+                    </h3>
+                }
+            </div>
+
+            <ul class="list-unstyled text-left">
+                @if (ViewBag.TItle != "List news" && ViewBag.TItle != "Home page")
+                {
+                    <li class="row">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.DateCreated)</span>
+                        @Html.DisplayFor(m => m.Id)
+                    </li>
+                    <li class="row">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Author)</span>
+                        @Html.DisplayFor(m => m.Id)
+                    </li>
+                }
+
+                <li class="row">
+                    <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Content)</span>
+                    <span class="col-lg-9 no-padding">
+                        @if (ViewBag.Title == "Edit news")
+                        {
+                            @Html.TextArea("Content", Model.Content, 10, 600, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+                            if (ViewBag.TItle != "List news" && ViewBag.TItle != "Home page")
+                            {
+                                @Html.DisplayFor(m => m.Content)
+                            }
+                            else
+                            {
+                                <p>@(Model.Content.Length > 200 ? Model.Content.Substring(0, 197) + "..." : Model.Content)</p>
+                            }
+                        }
+                    </span>
+                </li>
+            </ul>
+            @if (ViewBag.Title == "List news")
+            {
+                <div class="row">
+                    <a class="button button-rounded button-flat-primary" href="@Url.Action("Details", "News", new { id = @Model.Id})">
+                        <i class="fa fa-info">
+                            Details
+                        </i>
+                    </a>
+                </div>
+            }
+            <div class="row margin-top col-lg-offset-3">
+                @if (ViewBag.Title == "News details")
+                {
+
+                    <span class="col-lg-4">
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Edit", "News", new { id = @Model.Id })">
+                            <i class="fa fa-refresh">
+                                Edit
+                            </i>
+                        </a>
+                    </span>
+                    <span class="col-lg-4">
+                        @using (Html.BeginForm("Delete", "News", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button class="button button-rounded button-flat-caution" type="submit">
+                                <i class=" fa fa-warning no-margin no-padding">
+                                    Delete
+                                </i>
+                            </button>
+                        }
+                    </span>
+                }
+
+                @if (ViewBag.Title == "Edit news")
+                {
+
+                    <span class="col-lg-4">
+                        <button class="button button-rounded button-flat-primary" type="submit">
+                            <i class=" fa fa-upload no-margin no-padding">
+                                Apply
+                            </i>
+                        </button>
+                    </span>
+                    <span class="col-lg-4">
+                        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListNews", "News", new { id = @Model.Id })">
+                            <i class="fa fa-warning">
+                                Cancel
+                            </i>
+                        </a>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

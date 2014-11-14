@@ -1,4 +1,4 @@
-﻿namespace TeraNetSystem.Models
+﻿    namespace TeraNetSystem.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -30,7 +30,7 @@
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
 

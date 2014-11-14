@@ -1,0 +1,14 @@
+﻿@model TeraNetSystem.Web.Models.NewsViewModel
+@{
+    ViewBag.TItle = "Edit news";
+}
+
+<div class="admin-panel">
+    <h2>@ViewBag.Title</h2>
+    @using (Html.BeginForm("Edit", "News", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_NewsPartial")
+    }
+</div>
+

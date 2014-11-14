@@ -143,7 +143,7 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
         {
             if(edittedTask == null)
             {
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             var taskToEdit = this.Data.Tasks.All().FirstOrDefault(t => t.Id.ToString() == edittedTask.Id);
