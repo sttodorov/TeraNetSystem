@@ -29,10 +29,11 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
             int pageNumber = id.GetValueOrDefault(1);
 
             var allTasks = this.Data.Tasks.All().Where(t => t.Compleated == false);
+            var currentUserId = this.User.Identity.GetUserId();
 
             if (this.User.IsInRole("NetworkMan"))
             {
-                allTasks = allTasks.Where(t => t.NetworkManId == this.User.Identity.GetUserId());
+                allTasks = allTasks.Where(t => t.NetworkManId == currentUserId);
             }
             
             var requestsPage = allTasks.OrderBy(x => x.Id)

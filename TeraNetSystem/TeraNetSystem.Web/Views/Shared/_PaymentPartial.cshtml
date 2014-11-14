@@ -1,0 +1,82 @@
+﻿@model TeraNetSystem.Web.Models.PaymentViewModel
+
+<div class="content-box box-default margin-top col-lg-8">
+    <div class="row">
+        @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Payment")
+        {
+            <h4>Id: @Html.DisplayFor(m => m.Id)</h4>
+        }
+        <h4>Client info:</h4>
+        <ul class="list-unstyled text-left col-lg-offset-1">
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.DateCreated)</span>
+                @Html.DisplayFor(m => m.DateCreated)
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.PerMonth)</span>
+                @if (ViewBag.Title == "Payment details")
+                {
+                    @Html.DisplayFor(m => m.PerMonth)
+                }
+                else
+                {
+                    @Html.EnumDropDownListFor(m => m.PerMonth, new { @class = "form-control", id = "MonthDropdown" })
+                    @Html.ValidationMessageFor(m => m.PerMonth, "", new { @class = "text-danger" })
+                }
+
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Client.UserName)</span>
+                @Html.DisplayFor(m => m.Client.UserName)
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Client.TownName)</span>
+                @Html.DisplayFor(m => m.Client.TownName)
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Client.Address)</span>
+                <span class="col-lg-5 no-padding">
+                    @Html.DisplayFor(m => m.Client.Address)
+                </span>
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Client.Subscription.SubscriptionName)</span>
+                @Html.DisplayFor(m => m.Client.Subscription.SubscriptionName)
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Client.Subscription.Price)</span>
+                @Html.DisplayFor(m => m.Client.Subscription.Price)
+            </li>
+        </ul>
+        <h4>Office info:</h4>
+        <ul class="list-unstyled text-left col-lg-offset-1">
+
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Office.TownName)</span>
+                @Html.DisplayFor(m => m.Office.TownName)
+            </li>
+            <li class="row margin-10">
+                <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Office.Address)</span>
+                <span class="col-lg-5 no-padding">
+                    @Html.DisplayFor(m => m.Office.Address)
+                </span>
+            </li>
+        </ul>
+        @if (ViewBag.Title != "Payment details")
+        {
+            <div class="row margin-10" id="buttonsBlock">
+                @Html.HiddenFor(m => m.Client.Id)
+                @Html.HiddenFor(m => m.Office.Id)
+                <button class="button button-rounded button-flat-primary" type="submit" id="btnRegisterPayment">
+                    <i class=" fa fa-upload no-margin no-padding">
+                        Pay
+                    </i>
+                </button>
+                <a class="button button-rounded button-flat-caution" href="@Url.Action("SearchUser", "Payment")">
+                    Cancel
+                </a>
+            </div>
+        }
+    </div>
+</div>
+

@@ -181,10 +181,13 @@
     <Compile Include="Areas\Administration\Models\AdminOfficeViewModel.cs" />
     <Compile Include="Areas\Administration\Models\TownCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
+    <Compile Include="Areas\Office\Controllers\PaymentController.cs" />
     <Compile Include="Areas\Office\Controllers\RequestController.cs" />
     <Compile Include="Areas\Office\Controllers\SubscriptionController.cs" />
     <Compile Include="Areas\Office\Controllers\TaskController.cs" />
     <Compile Include="Areas\Office\Models\OfficeSubscriptionViewModel.cs" />
+    <Compile Include="Areas\Office\Models\PaymentSearchModel.cs" />
+    <Compile Include="Areas\Office\Models\UserSearchModel.cs" />
     <Compile Include="Areas\Office\Models\RequestViewModel.cs" />
     <Compile Include="Areas\Office\Models\TaskViewModel.cs" />
     <Compile Include="Areas\Office\OfficeAreaRegistration.cs" />
@@ -193,6 +196,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ClientPaymentController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +257,7 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mixitup.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
+    <Content Include="Scripts\PagesJs\GenerateReceipt.js" />
     <Content Include="Content\js\page_charts.js" />
     <Content Include="Content\js\portfolio.js" />
     <Content Include="Content\js\respond.min.js" />
@@ -334,6 +339,14 @@
     <Content Include="Areas\Office\Views\Shared\_TaskPartial.cshtml" />
     <Content Include="Areas\Office\Views\Task\ListTasks.cshtml" />
     <Content Include="Areas\Office\Views\Task\Edit.cshtml" />
+    <Content Include="Areas\Office\Views\Payment\ListUsers.cshtml" />
+    <Content Include="Areas\Office\Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Areas\Office\Views\Shared\_ListUsersPartial.cshtml" />
+    <Content Include="Areas\Office\Views\Payment\CreatePayment.cshtml" />
+    <Content Include="Areas\Office\Views\Payment\ListPayments.cshtml" />
+    <Content Include="Views\ClientPayment\Detailsaa.cshtml" />
+    <Content Include="Areas\Office\Views\Shared\_SearchPaymentPartial.cshtml" />
+    <Content Include="Areas\Office\Views\Payment\Detailsaa.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -397,12 +410,15 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Services\All.cshtml" />
     <Content Include="Views\Services\Request.cshtml" />
+    <Content Include="Views\Shared\_PaymentPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\ClientPayment\MyPayments.cshtml" />
+    <Content Include="Views\Shared\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\news\" />
     <Folder Include="Files\offices\" />
-    <Folder Include="Views\Payments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

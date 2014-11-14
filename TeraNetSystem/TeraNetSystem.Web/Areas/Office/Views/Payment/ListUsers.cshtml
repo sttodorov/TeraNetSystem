@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Models.ApplicationUserViewModel>
+@{
+    ViewBag.TItle = "Create payment";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    <h3 class="margin-top">Search user: </h3>
+    @using (Html.BeginForm("ListUsers", "Payment", null, FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        @Html.Partial("_SearchPartial", new TeraNetSystem.Web.Areas.Office.Models.UserSearchModel())
+    }
+    @Html.Partial("_ListUsersPartial", Model)
+</div>

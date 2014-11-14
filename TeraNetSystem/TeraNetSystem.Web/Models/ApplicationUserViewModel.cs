@@ -31,9 +31,25 @@
                     Address = a.Address,
                     UserName = a.UserName,
                     Email = a.Email,
-                    SubscriptionPlan = a.Subscription.SubscriptionName,
+                    Subscription = new SubscriptionViewModel
+                    {
+                        Id = a.Subscription.Id,
+                        SubscriptionName = a.Subscription.SubscriptionName,
+                        Price = a.Subscription.Price,
+                        DownloadSpeed = a.Subscription.DownloadSpeed,
+                        UploadSpeed = a.Subscription.UploadSpeed,
+                        Description = a.Subscription.Description
+                    },
                     ContractNumber = a.ContractNumber,
-                    RegisteredFrom = a.DateRegistered
+                    RegisteredFrom = a.DateRegistered,
+                    Office = new OfficeViewModel
+                    {
+                        Id = a.Office.Id.ToString(),
+                        TownName = a.Office.Town.TownName,
+                        Address = a.Office.Address,
+                        Name = a.Office.Name,
+                        Phone = a.Office.Phone,
+                    }
                 };
             }
         }
@@ -43,26 +59,36 @@
 
         public ICollection<IdentityUserLogin> Logins { get; set; }
 
+        [DisplayName("Phone number: ")]
         public string PhoneNumber { get; set; }
 
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
 
+        [DisplayName("Fullname: ")]
         public string FullName { get; set; }
 
+        [DisplayName("Town: ")]
         public string TownName { get; set; }
 
+        [DisplayName("Address: ")]
         public string Address { get; set; }
 
+        [DisplayName("Username: ")]
         public string UserName { get; set; }
 
+        [DisplayName("E-mail: ")]
         public string Email { get; set; }
 
-        public string SubscriptionPlan { get; set; }
-
+        [DisplayName("Contract №: ")]
         public string ContractNumber { get; set; }
 
+        [DisplayName("Member from: ")]
         public DateTime RegisteredFrom { get; set; }
+
+        public OfficeViewModel Office { get; set; }
+
+        public SubscriptionViewModel Subscription { get; set; }
     }
 }

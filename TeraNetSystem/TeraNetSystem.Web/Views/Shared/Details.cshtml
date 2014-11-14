@@ -1,0 +1,9 @@
+﻿@model TeraNetSystem.Web.Models.PaymentViewModel
+
+@{
+    ViewBag.Title = "Payment details";   
+}
+<div class="admin-panel">
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("_PaymentPartial", Model)
+</div>

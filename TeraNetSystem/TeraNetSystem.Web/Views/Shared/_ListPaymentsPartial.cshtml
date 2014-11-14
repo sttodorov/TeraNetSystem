@@ -9,8 +9,8 @@
             @Html.DisplayFor(m => payment.DateCreated)
         </li>
         <li class="row">
-            <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.ClientUserName)</span>
-           @Html.DisplayFor(m => payment.ClientUserName)
+            <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.Client.UserName)</span>
+           @Html.DisplayFor(m => payment.Client.UserName)
         </li>
         <li class ="row">
             <span class="col-lg-3 no-padding">@Html.LabelFor(m => payment.PerMonth)</span>

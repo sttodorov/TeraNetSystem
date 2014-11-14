@@ -49,7 +49,7 @@
                     {
                         <li>@Html.ActionLink("My payments", "ListPayments", "Payment", new { Area = string.Empty }, null)</li>
                     }
-                    @if (User.IsInRole("NertowrkMan") || User.IsInRole("Admin"))
+                    @if (User.IsInRole("NetworkMan") || User.IsInRole("Admin"))
                     {
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Network</a>
@@ -66,8 +66,9 @@
                                 @*<li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Office" }, null)</li>*@
                                 <li>@Html.ActionLink("Requests", "ListRequests", "Request", new { Area = "Office" }, null)</li>
                                 <li>@Html.ActionLink("News", "ListNews", "News", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("Create payment", "CreatePayment", "Payments", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("List payments", "ListPayments", "Payments", new { Area = "Office" }, null)</li>
+                                <li>@Html.ActionLink("Create payment", "ListUsers", "Payment", new { Area = "Office" }, null)</li>
+                                <li>@Html.ActionLink("List payments", "ListPayments", "Payment", new { Area = "Office" }, null)</li>
+                                <li>@Html.ActionLink("Register Client", "Register", "Account", new { Area = "" }, null)</li>
                             </ul>
                         </li>
                     }

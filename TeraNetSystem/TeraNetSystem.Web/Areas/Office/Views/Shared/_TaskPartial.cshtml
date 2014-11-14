@@ -51,7 +51,6 @@
                 <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Description)</span>
                 @if (ViewBag.Title == "Transfer requst to task" || ViewBag.Title == "Edit task")
                 {
-                    //if (ViewBag.Title == "Transfer requst to task") { }
                     @Html.EditorFor(m => m.Description, new { Value = Model.Description != null ? Model.Description : string.Empty })
                 }
                 else

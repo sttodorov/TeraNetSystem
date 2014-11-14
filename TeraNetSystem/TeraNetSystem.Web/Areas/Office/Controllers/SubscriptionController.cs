@@ -28,6 +28,7 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
 
             var allSubscriptions = this.Data.Subscriptions.All();
             var pageSubscriptions = allSubscriptions
+                            .OrderBy(s =>s.Id)
                             .Skip((pageNumber - 1) * PageSize)
                             .Take(PageSize)
                             .Select(OfficeSubscriptionViewModel.FromSubscription);

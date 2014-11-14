@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
     using TeraNetSystem.Models;
@@ -17,9 +18,27 @@
                     Id = p.Id,
                     DateCreated = p.DateCreated,
                     PerMonth = p.PerMonth,
-                    OfficeTown = p.Office.Town.TownName,
-                    OfficeAddress = p.Office.Address,
-                    ClientUserName = p.Client.UserName
+                    Office = new OfficeViewModel
+                    {
+                        Id = p.Office.Id.ToString(),
+                        Address = p.Office.Address,
+                        TownName = p.Office.Town.TownName,
+                        Name = p.Office.Name,
+                        Phone = p.Office.Phone
+                    },
+                    Client = new ApplicationUserViewModel
+                    {
+                        Id= p.Client.Id,
+                        UserName = p.Client.UserName,
+                        TownName  = p.Client.Town.TownName,
+                        Address = p.Client.Address,
+                        FullName = p.Client.FirstName + " " + p.Client.LastName,
+                        Subscription = new SubscriptionViewModel
+                        {
+                            SubscriptionName = p.Client.Subscription.SubscriptionName,
+                            Price = p.Client.Subscription.Price
+                        }
+                    },
                 };
             }
         }
@@ -30,15 +49,12 @@
         public DateTime DateCreated { get; set; }
 
         [DisplayName("Per month:")]
+        [Required]
         public Month PerMonth { get; set; }
 
-        [DisplayName("Username:")]
-        public string ClientUserName { get; set; }
+        public ApplicationUserViewModel Client { get; set; }
 
-        [DisplayName("Town:")]
-        public string OfficeTown { get; set; }
+        public OfficeViewModel Office { get; set; }
 
-        [DisplayName("Address:")]
-        public string OfficeAddress { get; set; }
     }
 }

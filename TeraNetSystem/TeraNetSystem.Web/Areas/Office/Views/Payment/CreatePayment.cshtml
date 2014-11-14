@@ -1,0 +1,17 @@
+﻿@model TeraNetSystem.Web.Models.PaymentViewModel
+@{
+    ViewBag.TItle = "Create payment";
+}
+
+<div class="admin-panel" id="PaymentInfo">
+    <h2>@ViewBag.Title</h2>
+    @using (Html.BeginForm("CreatePayment", "Payment", null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.Partial("_PaymentPartial")
+    }
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/PagesJs/GenerateReceipt.js");
+}

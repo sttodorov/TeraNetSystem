@@ -1,0 +1,27 @@
+﻿@model TeraNetSystem.Web.Areas.Office.Models.PaymentSearchModel
+<h3 class="margin-top">Search payment: </h3>
+
+<div class="row">
+    <span class="col-lg-3">
+        @Html.LabelFor(m => m.FromDate)
+    </span>
+    <span class="col-lg-3">
+        @Html.LabelFor(m => m.ToDate)
+    </span>
+    <span class="col-lg-3">
+        @Html.LabelFor(m => m.PerMonth)
+    </span>
+</div>
+<div class="row">
+    <span class="col-lg-3">
+        @Html.EditorFor(m => m.FromDate)
+    </span>
+    <span class="col-lg-3">
+        @Html.EditorFor(m => m.ToDate)
+    </span>
+    <span class="col-lg-3">
+        @Html.EnumDropDownListFor(m => m.PerMonth, new { @class = "form-control" })
+    </span>
+</div>
+
+@Html.Partial("_SearchPartial")

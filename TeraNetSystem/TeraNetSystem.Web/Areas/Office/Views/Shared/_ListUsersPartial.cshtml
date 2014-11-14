@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TeraNetSystem.Web.Models.ApplicationUserViewModel>
+
+@if (@Model.Count() == 0)
+{
+    <h1 class="text-center text-info">No users found!</h1>
+}
+else
+{
+    <h3>Found users:</h3>
+    for (int i = 1; i <= ViewBag.Pages; i++)
+    {
+        var modelSearch = (TeraNetSystem.Web.Areas.Office.Models.UserSearchModel)TempData["Search"];
+        <a class="button button-flat@( i==ViewBag.PageNumber ? "-primary" : "") button-circle" href="@Url.Action("ListUsers", new { page = i, TownName = modelSearch.TownName, Address = modelSearch.Address, UserName = modelSearch.UserName, FullName = modelSearch.FullName })">@i</a>
+    }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Town</th>
+                <th>Addresss</th>
+                <th>Username</th>
+                <th>Full name</th>
+                <th>Pay</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var currentClient in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(t => currentClient.TownName)</td>
+                    <td>@Html.DisplayFor(t => currentClient.Address)</td>
+                    <td>@Html.DisplayFor(t => currentClient.UserName)</td>
+                    <td>@Html.DisplayFor(t => currentClient.FullName)</td>
+                    <td>
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("CreatePayment", "Payment", new { id = currentClient.Id})">
+                            <i class="fa fa-money">
+                                Pay
+                            </i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
