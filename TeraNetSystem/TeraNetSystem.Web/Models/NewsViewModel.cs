@@ -37,6 +37,7 @@ namespace TeraNetSystem.Web.Models
         [StringLength(30, MinimumLength=5)]
         public string Title { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
 
         [Required]

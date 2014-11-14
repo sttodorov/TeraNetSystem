@@ -71,11 +71,6 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
             return View(GetNews(pageNumber));
         }
 
-        [HttpGet]
-        public ActionResult LatestNews()
-        {
-            return View(GetNews(1, 3));
-        }
 
         [HttpGet]
         public ActionResult Details(int? id)

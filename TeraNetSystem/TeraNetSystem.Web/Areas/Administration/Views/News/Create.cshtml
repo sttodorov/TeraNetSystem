@@ -1,0 +1,64 @@
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.NewsCreateModel
+@{
+    ViewBag.Title = "Add news";
+}
+
+
+@using (Html.BeginForm("Create", "News", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal admin-panel", enctype = "multipart/form-data" }))
+{
+    <h2>@ViewBag.Title</h2>
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="content-box box-default">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Url.Content("~/Content/images/news.png")" alt="OfficeImage" class="img-responsive" id="image-tag">
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <h4 class="content-box-title">
+                        @Html.LabelFor(m => m.Title)
+                    </h4>
+                </div>
+                <div class="row col-lg-offset-4 margin-bottom">
+                    @Html.EditorFor(m => m.Title)
+                </div>
+                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                
+                <div class="row margin-10">
+                    <span class="">
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Content)</span>
+                        @Html.TextAreaFor(m => m.Content, 10, 400, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                    </span>
+                </div>
+
+                <div class="row  margin-10">
+                    <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Image)</span>
+                    <span>
+                        <input type="file" name="Image" id="input-image" value=" " class="form-control col-lg-4" />
+                    </span>
+                    @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="button button-rounded button-flat-primary pull-left">
+                    <i class="fa fa-upload">
+                        Add
+                    </i>
+                </button>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/PagesJs/ImageReloader.js")
+}
+
+

@@ -1,5 +1,60 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<TeraNetSystem.Web.Models.NewsViewModel>
+@{
+    ViewBag.Title = "Home page";
 }
 
-<h1>@ViewBag.Title</h1>
+<h1>Latest news</h1>
+
+<section class="carousel-section">
+    <div id="carousel-example-generic" class="carousel carousel-razon slide" data-ride="carousel" data-interval="5000">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" id="home-slider">
+            @foreach (var news in @Model)
+            {
+                <div class="item ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-7">
+                                <div class="carousel-caption">
+                                    <div class="carousel-text">
+                                        <h1 class="animated fadeInDownBig animation-delay-7 carousel-title">@news.Title</h1>
+                                        <h2 class="animated fadeInDownBig animation-delay-5  crousel-subtitle">From: @news.Author.FullName - @Html.DisplayFor(m => news.DateCreated)</h2>
+                                        <p class="animated fadeInUpBig animation-delay-17">@(news.Content.Length > 200 ? news.Content.Substring(0, 197) + "..." : news.Content)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-5 hidden-xs carousel-img-wrap">
+                                <div class="carousel-img">
+                                    <img src="@Url.Content(news.ImagePath)" class=" animated bounceInUp animation-delay-3" alt="Image" width="250" height="350">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             } 
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $('#home-slider div:first-child').addClass('active');
+    </script>
+    
+}

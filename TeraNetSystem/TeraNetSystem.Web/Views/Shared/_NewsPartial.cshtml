@@ -44,13 +44,13 @@
                         }
                         else
                         {
-                            if (ViewBag.TItle != "List news" && ViewBag.TItle != "Home page")
+                            if (ViewBag.TItle == "List news")
                             {
-                                @Html.DisplayFor(m => m.Content)
+                                <p>@(Model.Content.Length > 200 ? Model.Content.Substring(0, 197) + "..." : Model.Content)</p>
                             }
                             else
                             {
-                                <p>@(Model.Content.Length > 200 ? Model.Content.Substring(0, 197) + "..." : Model.Content)</p>
+                                @Html.DisplayFor(m => m.Content)
                             }
                         }
                     </span>

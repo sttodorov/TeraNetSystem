@@ -19,7 +19,7 @@ namespace TeraNetSystem.Web.Controllers
         [HttpGet]
         public ActionResult AllOffices()
         {
-            var offices = this.Data.Offices.All().Select(OfficeViewModel.FromOffice).ToList();
+            var offices = this.Data.Offices.All().Select(OfficeViewModel.FromOffice);
 
             return View(offices);
         }

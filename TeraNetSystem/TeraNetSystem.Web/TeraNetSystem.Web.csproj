@@ -238,6 +238,11 @@
     <Content Include="Content\images\news.png" />
     <Content Include="Content\images\office.png" />
     <Content Include="Content\images\TeraNetLogo.png" />
+    <Content Include="Content\img\close.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\next.png" />
+    <Content Include="Content\img\prev.png" />
+    <Content Include="Content\img\slide_back.jpg" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\buttons.js" />
@@ -379,8 +384,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
