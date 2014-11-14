@@ -4,11 +4,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
+using Microsoft.AspNet.Identity;
+
 using TeraNetSystem.Data;
+using TeraNetSystem.Models;
 using TeraNetSystem.Web.Controllers;
 using TeraNetSystem.Web.Models;
+using System.IO;
+using TeraNetSystem.Web.Areas.Administration.Models;
 
-namespace TeraNetSystem.Web.Areas.Office.Controllers
+namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
     public class NewsController : BaseController
     {
@@ -66,9 +72,9 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
         }
 
         [HttpGet]
-        public ActionResult  LatestNews()
+        public ActionResult LatestNews()
         {
-            return View(GetNews(1,3));
+            return View(GetNews(1, 3));
         }
 
         [HttpGet]
@@ -80,7 +86,7 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            return GetSelectedNews(id);            
+            return GetSelectedNews(id);
         }
 
         [HttpPost]
@@ -112,14 +118,66 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
 
             if (selectedNews == null)
             {
-                TempData["Erorr"] = String.Format("News woth ID {0} NOT FOUND!",id);
+                TempData["Erorr"] = String.Format("News woth ID {0} NOT FOUND!", id);
             }
             else
             {
                 this.Data.News.Delete(selectedNews);
                 this.Data.SaveChanges();
                 TempData["Success"] = "News deleted successfully";
-            } 
+            }
+
+            return RedirectToAction("ListNews");
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(NewsCreateModel newsToCreate)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var currentUserId = this.User.Identity.GetUserId();
+
+                string imagePath = string.Empty;
+                string imageExt = string.Empty;
+
+                if (newsToCreate.Image == null)
+                {
+                    imagePath = "~/Content/images/news.png";
+                }
+                else
+                {
+                    string imageName = Guid.NewGuid().ToString();
+                    imageExt = Path.GetExtension(newsToCreate.Image.FileName);
+                    
+                    imagePath = "~/Files/news/" +  imageName + imageExt;
+                    newsToCreate.Image.SaveAs(Server.MapPath(imagePath));
+                }
+
+                var newNews = new News()
+                {
+                    Title = newsToCreate.Title,
+                    Content = newsToCreate.Content,
+                    AuthorId = currentUserId,
+                    ImagePath = imagePath
+                };
+
+                this.Data.News.Add(newNews);
+                this.Data.SaveChanges();
+                TempData["Success"] = "News added successfully!!";
+
+            }
+            else
+            {
+                TempData["Error"] = "Please provide correct information!";
+            }
 
             return RedirectToAction("ListNews");
         }

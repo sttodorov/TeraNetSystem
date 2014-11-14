@@ -26,11 +26,11 @@
                 {
                     <li class="row">
                         <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.DateCreated)</span>
-                        @Html.DisplayFor(m => m.Id)
+                        @Html.DisplayFor(m => m.DateCreated)
                     </li>
                     <li class="row">
-                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Author)</span>
-                        @Html.DisplayFor(m => m.Id)
+                        <span class="col-lg-3 no-padding">@Html.LabelFor(m => m.Author.FullName)</span>
+                        @Html.DisplayFor(m => m.Author.FullName)
                     </li>
                 }
 

@@ -177,11 +177,12 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\OfficeController.cs" />
     <Compile Include="Areas\Administration\Controllers\TownController.cs" />
+    <Compile Include="Areas\Administration\Models\NewsCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\OfficeCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\AdminOfficeViewModel.cs" />
     <Compile Include="Areas\Administration\Models\TownCreateModel.cs" />
     <Compile Include="Areas\Administration\Models\TownViewModel.cs" />
-    <Compile Include="Areas\Office\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\NewsController.cs" />
     <Compile Include="Areas\Office\Controllers\PaymentController.cs" />
     <Compile Include="Areas\Office\Controllers\RequestController.cs" />
     <Compile Include="Areas\Office\Controllers\SubscriptionController.cs" />
@@ -324,6 +325,7 @@
     <Content Include="Areas\Administration\Views\Office\CreatePage.cshtml" />
     <Content Include="Areas\Administration\Views\Office\EditPage.cshtml" />
     <Content Include="Areas\Administration\Views\Office\DeletePage.cshtml" />
+    <Content Include="Scripts\PagesJs\ImageReloader.js" />
     <Content Include="Views\Shared\_OfficePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Office\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_AdminOfficePartial.cshtml" />
@@ -350,9 +352,10 @@
     <Content Include="Views\ClientPayment\Detailsaa.cshtml" />
     <Content Include="Areas\Office\Views\Shared\_SearchPaymentPartial.cshtml" />
     <Content Include="Areas\Office\Views\Payment\Detailsaa.cshtml" />
-    <Content Include="Areas\Office\Views\News\ListNews.cshtml" />
-    <Content Include="Areas\Office\Views\News\Details.cshtml" />
-    <Content Include="Areas\Office\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\News\ListNews.cshtml" />
+    <Content Include="Areas\Administration\Views\News\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\News\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -15,7 +15,7 @@
     <div class="content-box box-default">
         <div class="row">
             <div class="col-md-4">
-                <img src="@Url.Content("~/Content/images/office.png")" alt="OfficeImage" class="img-responsive" id="office-image">
+                <img src="@Url.Content("~/Content/images/office.png")" alt="OfficeImage" class="img-responsive" id="image-tag">
             </div>
             <div class="col-md-8">
                 <div class="row">
@@ -71,21 +71,6 @@
 
 @section scripts
 {
-    <script>
-        $('#input-image').on('change', function () {
-            var $imgtag = $("#office-image");
-            var file = event.target.files[0];
-
-            var reader = new FileReader();
-
-            $imgtag.title = file.name;
-
-            reader.onload = function (event) {
-                $imgtag.attr('src', event.target.result);
-            };
-
-            reader.readAsDataURL(file);
-        });
-    </script>
+    @Scripts.Render("~/Scripts/PagesJs/ImageReloader.js")
 }
 
