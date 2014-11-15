@@ -16,10 +16,11 @@ using TeraNetSystem.Web.Areas.Administration.Models;
 
 namespace TeraNetSystem.Web.Areas.Administration.Controllers
 {
-    public class NewsController : BaseController
+    [Authorize(Roles="Admin")]
+    public class AdminNewsController : NewsController
     {
         private const int PageSize = 3;
-        public NewsController(ITeraNetData data)
+        public AdminNewsController(ITeraNetData data)
             : base(data)
         {
         }
@@ -42,24 +43,6 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
             return news;
         }
 
-        [ChildActionOnly]
-        private ActionResult GetSelectedNews(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var selectedNews = this.Data.News.All().Select(NewsViewModel.FromNews).FirstOrDefault(n => n.Id == id);
-
-            if (selectedNews == null)
-            {
-                TempData["Error"] = string.Format("News with Id {0} NOT FOUND!", id);
-                return RedirectToAction("ListNews");
-            }
-
-            return View(selectedNews);
-        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -72,11 +55,6 @@ namespace TeraNetSystem.Web.Areas.Administration.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult Details(int? id)
-        {
-            return GetSelectedNews(id);
-        }
 
         [HttpGet]
         public ActionResult Edit(int? id)

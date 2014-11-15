@@ -15,13 +15,26 @@ namespace TeraNetSystem.Web.Controllers
         {
 
         }
+        [HttpGet]
+        public ActionResult Careers()
+        {
+            return View();
+        }
 
+        [HttpGet]
+        public ActionResult TermsOfUse()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Index()
         {
             var latestNews = this.GetLatestNews();
             return View(latestNews);
         }
 
+        [OutputCache(Duration=60*10)]
         private IQueryable<NewsViewModel> GetLatestNews()
         {
             var result = this.Data.News.All()

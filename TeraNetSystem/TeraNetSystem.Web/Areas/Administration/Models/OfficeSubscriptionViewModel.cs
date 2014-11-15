@@ -1,4 +1,4 @@
-﻿namespace TeraNetSystem.Web.Areas.Office.Models
+﻿namespace TeraNetSystem.Web.Areas.Administration.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,6 +24,8 @@
                     Price = s.Price,
                     Users =  s.Users.AsQueryable()
                                 .Select(ApplicationUserViewModel.FromUser)
+                                .OrderByDescending(a => a.RegisteredFrom)
+                                .Take(3)
                                 .ToList()
                 };
             }

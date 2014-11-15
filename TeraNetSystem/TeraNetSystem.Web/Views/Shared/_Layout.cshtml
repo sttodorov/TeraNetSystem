@@ -20,7 +20,7 @@
     @Styles.Render("~/Content/css/buttons.css")
 
     @Styles.Render("~/Content/css/Site.css")
-   
+
 </head>
 <body>
     <header id="header-full-top" class="hidden-xs header-full">
@@ -48,39 +48,40 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("My payments", "MyPayments", "ClientPayment", new { Area = string.Empty }, null)</li>
-                    }
-                    @if (User.IsInRole("NetworkMan") || User.IsInRole("Admin"))
-                    {
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Network</a>
-                            <ul class="dropdown-menu dropdown-menu-left">
-                                <li>@Html.ActionLink("Tasks", "ListTasks", "Task", new { Area = "Office" }, null)</li>
-                            </ul>
-                        </li>
-                    }
-                    @if (User.IsInRole("OfficeMan") || User.IsInRole("Admin"))
-                    {
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Office</a>
-                            <ul class="dropdown-menu dropdown-menu-left">
-                                <li>@Html.ActionLink("Requests", "ListRequests", "Request", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("Create payment", "ListUsers", "Payment", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("List payments", "ListPayments", "Payment", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("Register Client", "Register", "Account", new { Area = "" }, null)</li>
-                            </ul>
-                        </li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
-                            <ul class="dropdown-menu dropdown-menu-left">
-                                <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
-                                <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
-                                <li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Office" }, null)</li>
-                                <li>@Html.ActionLink("News", "ListNews", "News", new { Area = "Administration" }, null)</li>
-                            </ul>
-                        </li>
+
+                        if (User.IsInRole("NetworkMan") || User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Network</a>
+                                <ul class="dropdown-menu dropdown-menu-left">
+                                    <li>@Html.ActionLink("Tasks", "ListTasks", "Task", new { Area = "Office" }, null)</li>
+                                </ul>
+                            </li>
+                        }
+                        if (User.IsInRole("OfficeMan") || User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Office</a>
+                                <ul class="dropdown-menu dropdown-menu-left">
+                                    <li>@Html.ActionLink("Requests", "ListRequests", "Request", new { Area = "Office" }, null)</li>
+                                    <li>@Html.ActionLink("Create payment", "ListUsers", "Payment", new { Area = "Office" }, null)</li>
+                                    <li>@Html.ActionLink("List payments", "ListPayments", "Payment", new { Area = "Office" }, null)</li>
+                                    <li>@Html.ActionLink("Register Client", "Register", "Account", new { Area = "" }, null)</li>
+                                </ul>
+                            </li>
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                <ul class="dropdown-menu dropdown-menu-left">
+                                    <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
+                                    <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
+                                    <li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Administration" }, null)</li>
+                                    <li>@Html.ActionLink("News", "ListNews", "AdminNews", new { Area = "Administration" }, null)</li>
+                                </ul>
+                            </li>
+                        }
                     }
                 </ul>
             </div><!-- navbar-collapse -->
@@ -100,61 +101,40 @@
     </div>
     <aside id="footer-widgets">
         <div class="container">
-            <div class="row">
+            <div class="row margin-top margin-bottom">
                 <div class="col-md-4">
-                    <h3 class="footer-widget-title">Sitemap</h3>
-                    <ul class="list-unstyled three_cols">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Services", "All", "Services")</li>
-                        <li>@Html.ActionLink("Contact", "Offices", "Contacts")</li>
-                    </ul>
+                    @Html.Partial("_SitemapPartial")
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-md-offset-1">
                     <div class="footer-widget">
-                        <h3 class="footer-widget-title">Recent News</h3>
-                        <div class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m2.jpg" width="75" height="75" alt="image"></a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Lorem ipsum Duis quis occaecat minim lorem ipsum tempor officia labor</a></h4>
-                                <small>August 18, 2013</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m11.jpg" width="75" height="75" alt="image"></a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Lorem ipsum dolor excepteur sunt in lorem ipsum cillum tempor</a></h4>
-                                <small>September 14, 2013</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="../assets/img/demo/m4.jpg" width="75" height="75" alt="image"></a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Lorem ipsum Dolor cupidatat minim adipisicing et fugiat</a></h4>
-                                <small>October 9, 2013</small>
-                            </div>
-                        </div>
+                        <h3 class="footer-widget-title ">Links</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.facebook.com/TeraNet2007" class="btn-social solid facebook"><i class="fa fa-facebook"></i>Facebook</a></li>
+                            <li><a href="#" class="btn-social solid linkedin"><i class="fa fa-linkedin"></i>Linkedin</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <h3 class="footer-widget-title">On Connection Probles</h3>
-                    <ul class="list-unstyled three_cols">
-                        <li>Call Center</li>
-                        <li>+359 889 888 999</li>
-                    </ul>
+                    <div class="footer-widget">
+                        <h3 class="footer-widget-title">On Connection Probles</h3>
+                        <ul class="list-unstyled">
+                            <li>Call Center</li>
+                            <li>+359 889 888 999</li>
+                        </ul>
+
+                    </div>
                 </div>
             </div> <!-- row -->
 
         </div> <!-- container -->
     </aside>
     <footer id="footer">
-        <p>Powered by: St. Todorov | Desgin: Artificial Reason, inc. © 2014 </p>
+        <p>St. Todorov © 2014| Open source project <a href="https://github.com/sttodorov/TeraNetSystem">Github</a>  </p>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Content/js/jquery.bxslider.min.js")
-    @Scripts.Render("~/Content/js/carousels.js")
     @RenderSection("scripts", false)
 </body>
 </html>

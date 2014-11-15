@@ -59,7 +59,7 @@
             @if (ViewBag.Title == "List news")
             {
                 <div class="row">
-                    <a class="button button-rounded button-flat-primary" href="@Url.Action("Details", "News", new { id = @Model.Id})">
+                    <a class="button button-rounded button-flat-primary" href="@Url.Action("NewsDetails", "AdminNews", new { id = @Model.Id })">
                         <i class="fa fa-info">
                             Details
                         </i>
@@ -71,7 +71,7 @@
                 {
 
                     <span class="col-lg-4">
-                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Edit", "News", new { id = @Model.Id })">
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Edit", "AdminNews", new { id = @Model.Id })">
                             <i class="fa fa-refresh">
                                 Edit
                             </i>
@@ -101,7 +101,7 @@
                         </button>
                     </span>
                     <span class="col-lg-4">
-                        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListNews", "News", new { id = @Model.Id })">
+                        <a class="button button-rounded button-flat-caution" href="@Url.Action("ListNews", "AdminNews", new { id = @Model.Id })">
                             <i class="fa fa-warning">
                                 Cancel
                             </i>

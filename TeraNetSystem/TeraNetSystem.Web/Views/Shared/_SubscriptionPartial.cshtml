@@ -99,6 +99,7 @@
                     {
                         @Html.EditorFor(m => m.Description, new { Value = Model.Description })
                         @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(m=>m.SubscriptionName)
                     }
                     else if (ViewBag.Title == "Create subscription")
                     {

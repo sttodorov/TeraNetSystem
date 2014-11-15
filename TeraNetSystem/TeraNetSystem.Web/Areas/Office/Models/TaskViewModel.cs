@@ -44,19 +44,27 @@
         public string Id { get; set; }
 
         [DisplayName("Networkman: ")]
+        [Required]
         public string NetworkerId { get; set; }
 
         public ApplicationUser Networker { get; set; }
 
         [DisplayName("Town: ")]
+        [Required]
         public string TownName { get; set; }
 
         [DisplayName("Address: ")]
         [DataType(DataType.MultilineText)]
+        [Required]
+        [MinLength(5)]
+        [MaxLength(50)]
         public string Address { get; set; }
 
         [DisplayName("Description: ")]
         [DataType(DataType.MultilineText)]
+        [Required]
+        [MinLength(10)]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         public List<SelectListItem> Netwrokers { get; set; }

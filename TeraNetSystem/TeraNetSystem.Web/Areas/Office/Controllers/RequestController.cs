@@ -13,7 +13,7 @@
     using TeraNetSystem.Data;
     using System.Net;
 
-    public class RequestController : BaseController
+    public class RequestController : OfficeController
     {
         private const int PageSize = 5;
 
@@ -30,7 +30,11 @@
             var currentUserId = this.User.Identity.GetUserId();
             var currentOfficeTownId = this.Data.Users.All().FirstOrDefault(u => u.Id == currentUserId).TownId;
 
-            var requestForCurrentTown = this.Data.Requests.All().Where(r => r.TownId == currentOfficeTownId && r.Approved == false);
+            var requestForCurrentTown = this.Data.Requests.All().Where(r => r.Approved == false);
+            if (User.IsInRole("OfficeMan"))
+            {
+                requestForCurrentTown = this.Data.Requests.All().Where(r => r.TownId == currentOfficeTownId);
+            }
 
             var requestsPage = requestForCurrentTown.OrderBy(x => x.Id)
                              .Skip((pageNumber - 1) * PageSize)
@@ -56,7 +60,6 @@
 
             if (selectedRequests == null)
             {
-                return HttpNotFound();
             }
 
             return View(selectedRequests);
@@ -71,7 +74,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var requestToBeDeleted = this.Data.Requests.All().FirstOrDefault(r => r.Id.ToString() == id);
+            var requestToBeDeleted = this.Data.Requests.GetById(new Guid(id));
 
             this.Data.Requests.Delete(requestToBeDeleted);
             this.Data.SaveChanges();
@@ -91,13 +94,7 @@
 
             var selectedRequestsAsTask = this.Data.Requests.All().Select(TaskViewModel.FromRequest).FirstOrDefault(t => t.Id.ToString() == id);
 
-            var networkersForCurrentTown = this.Data.Users.All().Where(u => u.Town.TownName == selectedRequestsAsTask.TownName).ToList();
-            var networkersList = new List<SelectListItem>();
-
-            foreach (var worker in networkersForCurrentTown)
-            {
-                networkersList.Add(new SelectListItem() { Value = worker.Id, Text = string.Format("{0} - {1}", worker.UserName, worker.FirstName) });
-            }
+            var networkersList = this.GetNetworkers(selectedRequestsAsTask.TownName);
 
             selectedRequestsAsTask.Netwrokers = networkersList;
 

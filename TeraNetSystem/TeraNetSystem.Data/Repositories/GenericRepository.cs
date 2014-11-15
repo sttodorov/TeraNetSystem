@@ -23,9 +23,9 @@
             return this.context.SetEntity<T>().Where(c => c.IsDeleted == false);
         }
 
-        public IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions)
+        public T GetById(object id)
         {
-            return this.All().Where(conditions);
+            return this.context.SetEntity<T>().Find(id);
         }
 
         public void Add(T entity)

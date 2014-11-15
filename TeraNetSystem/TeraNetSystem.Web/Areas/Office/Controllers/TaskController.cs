@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-
-using Microsoft.AspNet.Identity;
-
-using TeraNetSystem.Data;
-using TeraNetSystem.Models;
-using TeraNetSystem.Web.Areas.Office.Models;
-using TeraNetSystem.Web.Controllers;
-using TeraNetSystem.Web.Models;
-
-namespace TeraNetSystem.Web.Areas.Office.Controllers
+﻿namespace TeraNetSystem.Web.Areas.Office.Controllers
 {
-    public class TaskController : BaseController
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using Microsoft.AspNet.Identity;
+
+    using TeraNetSystem.Data;
+    using TeraNetSystem.Models;
+    using TeraNetSystem.Web.Areas.Office.Models;
+    using TeraNetSystem.Web.Controllers;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Web.Security;
+
+    [Authorize(Roles = "Admin,OfficeMan,NetworkMan")]
+    public class TaskController : NetworkController
     {
         private const int PageSize = 3;
+
         public TaskController(ITeraNetData data)
-            :base(data)
+            : base(data)
         {
         }
 
@@ -35,7 +37,7 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
             {
                 allTasks = allTasks.Where(t => t.NetworkManId == currentUserId);
             }
-            
+
             var requestsPage = allTasks.OrderBy(x => x.Id)
                            .Skip((pageNumber - 1) * PageSize)
                            .Take(PageSize)
@@ -50,14 +52,15 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,OfficeMan")]
         public ActionResult Create(TaskViewModel taskTOCreate)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var selectedTown = this.Data.Towns.All().FirstOrDefault(t => t.TownName == taskTOCreate.TownName);
-                if(selectedTown == null)
+                if (selectedTown == null)
                 {
-                    TempData["Error"] = String.Format("No {0} town found!",selectedTown.TownName);
+                    TempData["Error"] = String.Format("No {0} town found!", selectedTown.TownName);
                     return View(taskTOCreate);
                 }
                 var task = new WorkTask
@@ -86,29 +89,34 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult MarkAsDone(string id)
         {
-            if(id == null)
+            if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);                
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectedTask = this.Data.Tasks.All().FirstOrDefault(t =>t.Id.ToString() == id);
-            if(selectedTask==null)
+            var selectedTask = this.Data.Tasks.GetById(new Guid(id));
+
+            if (selectedTask == null)
+            {
+                TempData["Error"] = String.Format("Task with ID {0} Not Found!", id);
+            }
+            else
             {
 
+                selectedTask.Compleated = true;
+                selectedTask.DateCompleated = DateTime.Now;
+
+                this.Data.SaveChanges();
+
+                TempData["Success"] = String.Format("Task with id - {0} mark as DONE sucessfully!", id);
             }
-
-            selectedTask.Compleated = true;
-            selectedTask.DateCompleated = DateTime.Now;
-
-            this.Data.SaveChanges();
-
-            TempData["Success"] =  String.Format("Task with id - {0} mark as DONE sucessfully!", id);
 
             return RedirectToAction("ListTasks");
 
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,OfficeMan")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -120,44 +128,46 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
 
             if (selectedTask == null)
             {
-                return HttpNotFound();
+                TempData["Error"] = String.Format("Task with ID {0} Not Found!", id);
             }
 
-            var networkersForCurrentTaskTown = this.Data.Users.All().Where(u => u.Town.TownName == selectedTask.TownName).ToList();
-            
-            var networkersList = new List<SelectListItem>();
-
-            foreach (var worker in networkersForCurrentTaskTown)
-            {
-                networkersList.Add(new SelectListItem() { Value = worker.Id, Text = string.Format("{0} - {1}", worker.UserName, worker.FirstName) });
-            }
+            var networkersList = this.GetNetworkers(selectedTask.TownName);
 
             selectedTask.Netwrokers = networkersList;
+            selectedTask.Netwrokers.FirstOrDefault(w => w.Value == selectedTask.Networker.Id).Selected = true;
 
             return View(selectedTask);
         }
 
+        
+
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(TaskViewModel edittedTask)
+        [Authorize(Roles = "Admin,OfficeMan")]
+        public ActionResult EditPost(TaskViewModel editedTask)
         {
-            if(edittedTask == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var taskToEdit = this.Data.Tasks.GetById(new Guid(editedTask.Id));
+
+                taskToEdit.Address = editedTask.Address;
+                taskToEdit.Description = editedTask.Description;
+                taskToEdit.NetworkManId = editedTask.NetworkerId;
+                this.Data.SaveChanges();
+
+                return RedirectToAction("ListTasks");
             }
-
-            var taskToEdit = this.Data.Tasks.All().FirstOrDefault(t => t.Id.ToString() == edittedTask.Id);
-
-            taskToEdit.Address = edittedTask.Address;
-            taskToEdit.Description = edittedTask.Description;
-            taskToEdit.NetworkManId = edittedTask.NetworkerId;
-            this.Data.SaveChanges();
-
-            return RedirectToAction("ListTasks");
+            else
+            {
+                editedTask.Netwrokers = this.GetNetworkers(editedTask.TownName);
+                editedTask.Netwrokers.FirstOrDefault(w => w.Value == editedTask.Networker.Id).Selected = true;
+                return View(editedTask);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,OfficeMan")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -165,11 +175,11 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var taskToBeDeleted = this.Data.Tasks.All().FirstOrDefault(r => r.Id.ToString() == id);
+            var taskToBeDeleted = this.Data.Tasks.GetById(new Guid(id));
 
-            if(taskToBeDeleted == null)
+            if (taskToBeDeleted == null)
             {
-
+                TempData["Error"] = String.Format("Task with ID {0} Not Found!", id);
             }
 
             this.Data.Tasks.Delete(taskToBeDeleted);

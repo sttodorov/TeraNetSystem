@@ -30,7 +30,7 @@
                     <td>@Html.DisplayFor(t => currnetTown.UsersCount)</td>
                     <td>@Html.DisplayFor(t => currnetTown.OfficesCount)</td>
                     <td>
-                        <a class="button button-rounded button-flat-primary" href="@Url.Action("EditPage", "Town", new { id = currnetTown.Id})">
+                        <a class="button button-rounded button-flat-primary" href="@Url.Action("Edit", "Town", new { id = currnetTown.Id})">
                             <i class="fa fa-refresh">
                                 Edit
                             </i>
@@ -38,7 +38,7 @@
                         
                     </td>
                     <td>
-                        <a class="button button-rounded button-flat-caution" href="@Url.Action("DeletePage", "Town", new { id = currnetTown.Id})">
+                        <a class="button button-rounded button-flat-caution" href="@Url.Action("Delete", "Town", new { id = currnetTown.Id})">
                             <i class=" fa fa-warning">
                                 Delete
                             </i>
@@ -48,6 +48,6 @@
             }
         </tbody>
     </table>
-    <a href="@Url.Action("CreatePage", "Town")" class="button button-block button-rounded button-primary button-large">Add town</a>
+    <a href="@Url.Action("Create", "Town")" class="button button-block button-rounded button-primary button-large">Add town</a>
     
 </div>

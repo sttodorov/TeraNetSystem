@@ -10,7 +10,7 @@
     using TeraNetSystem.Web.Areas.Administration.Models;
     using TeraNetSystem.Web.Controllers;
 
-    public class TownController : BaseController
+    public class TownController : AdministrationController
     {
         private const int PageSize = 3;
 
@@ -19,10 +19,29 @@
         {
 
         }
-        // GET: Administration/Town
-        public ActionResult Index()
+
+        private bool IsUnique(string townName)
         {
-            return View();
+            return this.Data.Towns.All().Any(t => t.TownName == townName);
+        }
+
+        [ChildActionOnly]
+        private ActionResult GetSelectedTown(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var selectedTown = this.Data.Towns.All().Select(TownViewModel.FromTown).FirstOrDefault(t => t.Id == id);
+
+            if (selectedTown == null)
+            {
+                TempData["Error"] = "Town with ID {0} NOT FOUND";
+                return RedirectToAction("ListTowns");
+            }
+
+            return View(selectedTown);
         }
 
         [HttpGet]
@@ -45,7 +64,7 @@
         }
 
         [HttpGet]
-        public ActionResult CreatePage()
+        public ActionResult Create()
         {
             return View();
         }
@@ -56,6 +75,13 @@
         {
             if (ModelState.IsValid)
             {
+                bool hasSameTown = this.IsUnique(createdTown.Name);
+                if(hasSameTown)
+                {
+                    TempData["Error"] = String.Format("Town {0} aslready exists!", createdTown.Name);
+                    return View();
+                }
+
                 var newTown = new Town()
                 {
                     TownName = createdTown.Name
@@ -70,39 +96,23 @@
             return RedirectToAction("ListTowns");
         }
 
+
         [HttpGet]
-        public ActionResult DeletePage(int? id)
+        public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var selectedTown = this.Data.Towns.All().Select(TownViewModel.FromTown).FirstOrDefault(t => t.Id == id);
-
-            if (selectedTown == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(selectedTown);
-
+            return this.GetSelectedTown(id);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePage(int id)
+        public ActionResult Delete(int id)
         {
             var townToBeDeleted = this.Data.Towns.All().FirstOrDefault(t => t.Id == id);
 
             foreach (var office in townToBeDeleted.Offices)
             {
                 this.Data.Offices.Delete(office);
-            }
-            foreach (var client in townToBeDeleted.Users)
-            {
-                this.Data.Users.Delete(client);
             }
 
             this.Data.Towns.Delete(townToBeDeleted);
@@ -112,28 +122,23 @@
         }
 
         [HttpGet]
-        public ActionResult EditPage(int? id)
+        public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var selectedTown = this.Data.Towns.All().Select(TownViewModel.FromTown).FirstOrDefault(t => t.Id == id);
-
-            if (selectedTown == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(selectedTown);
+            return this.GetSelectedTown(id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPage(TownViewModel edditedTown)
+        public ActionResult Edit(TownViewModel edditedTown)
         {
-            var townToBeEdiited = this.Data.Towns.All().FirstOrDefault(t => t.Id == edditedTown.Id);
+            var townToBeEdiited = this.Data.Towns.GetById(edditedTown.Id);
+
+            bool hasSameTown = this.IsUnique(edditedTown.TownName);
+            if (hasSameTown)
+            {
+                TempData["Error"] = String.Format("Town {0} aslready exists!", edditedTown.TownName);
+                return View(edditedTown);
+            }
 
             townToBeEdiited.TownName = edditedTown.TownName;
             this.Data.SaveChanges();

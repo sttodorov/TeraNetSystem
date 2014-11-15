@@ -1,0 +1,40 @@
+﻿<h3 class="footer-widget-title">Sitemap</h3>
+<div class="col-md-4">
+    <ul class="list-unstyled ">
+        <li>@Html.ActionLink("Home", "Index", "Home", new { Area = string.Empty }, null)</li>
+        <li>@Html.ActionLink("Services", "All", "Services", new { Area = string.Empty }, null)</li>
+        <li>@Html.ActionLink("Contact", "AllOffices", "Contact", new { Area = string.Empty }, null)</li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("My payments", "MyPayments", "ClientPayment", new { Area = string.Empty }, null)</li>
+        }
+        <li><a href="/Careers">Careers</a></li>
+        <li><a href="/TermsOfUse">Terms of use</a></li>
+    </ul>
+</div>
+@if (User.IsInRole("Admin") || User.IsInRole("OfficeMan") || User.IsInRole("NetworkMan"))
+{
+    <div class="col-md-5">
+        <ul class="list-unstyled ">
+            <li>@Html.ActionLink("Tasks", "ListTasks", "Task", new { Area = "Office" }, null)</li>
+            @if (User.IsInRole("OfficeMan") || User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Requests", "ListRequests", "Request", new { Area = "Office" }, null)</li>
+                <li>@Html.ActionLink("Create payment", "ListUsers", "Payment", new { Area = "Office" }, null)</li>
+                <li>@Html.ActionLink("List payments", "ListPayments", "Payment", new { Area = "Office" }, null)</li>
+                <li>@Html.ActionLink("Register Client", "Register", "Account", new { Area = "" }, null)</li>
+            }
+        </ul>
+    </div>
+    if (User.IsInRole("OfficeMan") || User.IsInRole("Admin"))
+    {
+        <div class="col-md-3">
+            <ul class="list-unstyled ">
+                <li>@Html.ActionLink("Towns", "ListTowns", "Town", new { Area = "Administration" }, null)</li>
+                <li>@Html.ActionLink("Offices", "ListOffices", "Office", new { Area = "Administration" }, null)</li>
+                <li>@Html.ActionLink("Subscriptions", "ListSubscriptions", "Subscription", new { Area = "Administration" }, null)</li>
+                <li>@Html.ActionLink("News", "ListNews", "News", new { Area = "Administration" }, null)</li>
+            </ul>
+        </div>
+    }
+}

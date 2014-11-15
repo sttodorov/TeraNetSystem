@@ -57,7 +57,7 @@
                     {
                         @Html.EditorFor(m => m.Phone, new { Value = Model.Phone })
                         @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
-
+                        @Html.HiddenFor(m => m.TownName)
                     }
                     else
                     {
@@ -65,9 +65,9 @@
                     }
                 </li>
             </ul>
-            @if (ViewBag.Title != "Contacts")
+            @if (ViewBag.Title == "Office details")
             {
-                Html.RenderPartial("_AdminOfficePartial", Model);
+                @Html.Partial("_AdminOfficePartial", Model)
             }
         </div>
     </div>

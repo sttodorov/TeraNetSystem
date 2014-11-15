@@ -1,4 +1,4 @@
-﻿@model TeraNetSystem.Web.Areas.Office.Models.OfficeSubscriptionViewModel
+﻿@model TeraNetSystem.Web.Areas.Administration.Models.OfficeSubscriptionViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -16,11 +16,11 @@
                 }
                 else
                 {
-                    <h3>Latest 3 form @Model.Users.Count</h3>
+                    <h3>Latest @(Model.Users.Count>3 ? 3 : Model.Users.Count)</h3>
                 }
             </div>
             <div class="panel-body">
-                @foreach (var client in Model.Users.OrderByDescending(a => a.RegisteredFrom).Take(5))
+                @foreach (var client in Model.Users)
                 {
                     <ul class="list-unstyled row margin-10">
                         <li>

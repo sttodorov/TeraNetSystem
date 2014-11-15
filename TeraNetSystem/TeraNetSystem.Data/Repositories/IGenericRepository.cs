@@ -8,7 +8,7 @@
     {
         IQueryable<T> All();
 
-        IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions);
+        T GetById(object id);
 
         void Add(T entity);
 

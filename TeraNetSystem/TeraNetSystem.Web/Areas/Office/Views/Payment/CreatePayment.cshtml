@@ -7,6 +7,7 @@
     <h2>@ViewBag.Title</h2>
     @using (Html.BeginForm("CreatePayment", "Payment", null, FormMethod.Post, new { @class = "form-horizontal" }))
     {
+        @Html.AntiForgeryToken()
         @Html.Partial("_PaymentPartial")
     }
 </div>

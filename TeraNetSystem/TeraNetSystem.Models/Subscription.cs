@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Subscription : IEntityProtectedDelete
     {
@@ -19,6 +20,7 @@
         [Required]
         [MinLength(3)]
         [MaxLength(20)]
+        [Index(IsUnique = true)]
         public string SubscriptionName { get; set; }
 
         [Required]

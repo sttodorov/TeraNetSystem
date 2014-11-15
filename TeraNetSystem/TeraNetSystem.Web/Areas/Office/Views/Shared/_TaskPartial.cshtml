@@ -13,6 +13,7 @@
                 @if (ViewBag.Title == "Transfer requst to task" || ViewBag.Title == "Edit task")
                 {
                     @Html.DropDownListFor(m => m.NetworkerId, Model.Netwrokers, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NetworkerId, string.Empty, new { @class="text-danger"})
                 }
                 else
                 {
@@ -21,24 +22,16 @@
             </li>
             <li class="row margin-10">
                 <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.TownName)</span>
-                @if (ViewBag.Title == "Transfer requst to task")
-                {
-                    @Html.TextBoxFor(m => m.TownName, new { @readonly = "readonly" })
-                }
-                else
-                {
                     @Html.DisplayFor(m => m.TownName)
-                }
             </li>
             <li class="row margin-10">
                 <span class="col-lg-6 no-padding">@Html.LabelFor(m => m.Address)</span>
-                @if (ViewBag.Title == "Transfer requst to task")
-                {
-                    @Html.TextBoxFor(m => m.Address, new { @readonly = "readonly" })
-                }
-                else if (ViewBag.Title == "Edit task")
+                
+                @if (ViewBag.Title == "Edit task" || ViewBag.Title == "Transfer requst to task")
                 {
                     @Html.EditorFor(m => m.Address, new { Value = Model.Address })
+                    @Html.ValidationMessageFor(m => m.Address, string.Empty, new { @class = "text-danger" })
+                    @Html.HiddenFor(m=>m.TownName)
                 }
                 else
                 {
@@ -52,6 +45,7 @@
                 @if (ViewBag.Title == "Transfer requst to task" || ViewBag.Title == "Edit task")
                 {
                     @Html.EditorFor(m => m.Description, new { Value = Model.Description != null ? Model.Description : string.Empty })
+                    @Html.ValidationMessageFor(m => m.Description, string.Empty, new { @class = "text-danger" })
                 }
                 else
                 {

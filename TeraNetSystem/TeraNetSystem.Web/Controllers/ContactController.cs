@@ -11,12 +11,13 @@ namespace TeraNetSystem.Web.Controllers
     public class ContactController : BaseController
     {
         public ContactController(ITeraNetData data)
-            :base(data)
+            : base(data)
         {
 
         }
 
         [HttpGet]
+        [OutputCache(Duration = 60 * 60 * 24)]
         public ActionResult AllOffices()
         {
             var offices = this.Data.Offices.All().Select(OfficeViewModel.FromOffice);

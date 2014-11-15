@@ -6,13 +6,13 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+
     using TeraNetSystem.Data;
     using TeraNetSystem.Models;
-    using TeraNetSystem.Web.Areas.Administration.Models;
-    using TeraNetSystem.Web.Controllers;
     using TeraNetSystem.Web.Models;
+    using TeraNetSystem.Web.Areas.Administration.Models;
 
-    public class OfficeController : BaseController
+    public class OfficeController : AdministrationController
     {
         private const int PageSize = 5;
 
@@ -21,6 +21,7 @@
         {
 
         }
+
 
         [HttpGet]
         public ActionResult ListOffices(int? id)
@@ -103,8 +104,8 @@
             return RedirectToAction("ListOffices");
         }
 
-        [HttpGet]
-        public ActionResult Details(string id)
+        [ChildActionOnly]
+        private ActionResult GetSelectedOffice(string id)
         {
             if (id == null)
             {
@@ -115,75 +116,62 @@
 
             if (selectedOffice == null)
             {
-                return HttpNotFound();
+                TempData["Error"] = "Office with ID {0} NOT FOUND";
+                return RedirectToAction("ListOffices");
             }
 
             return View(selectedOffice);
+        }
+
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            return this.GetSelectedOffice(id);   
         }
 
         [HttpGet]
         public ActionResult EditPage(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var selectedOffice = this.Data.Offices.All().Select(AdminOfficeViewModel.FromOffice).FirstOrDefault(t => t.Id.ToString() == id);
-
-            if (selectedOffice == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(selectedOffice);
+            return this.GetSelectedOffice(id);   
         }
 
         [HttpPost, ActionName("EditPage")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPagePost(AdminOfficeViewModel edditedOffice)
+        public ActionResult EditPagePost(AdminOfficeViewModel editedOffice)
         {
-            var officeToEdit = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == edditedOffice.Id);
+            var officeToEdit = this.Data.Offices.GetById(new Guid(editedOffice.Id));
 
-            officeToEdit.Name = edditedOffice.Name;
-            officeToEdit.Address = edditedOffice.Address;
-            officeToEdit.Phone = edditedOffice.Phone;
+            if (ModelState.IsValid)
+            {
 
-            this.Data.SaveChanges();
+                officeToEdit.Name = editedOffice.Name;
+                officeToEdit.Address = editedOffice.Address;
+                officeToEdit.Phone = editedOffice.Phone;
 
-            TempData["Success"] = String.Format("Office {0} updated successfully!", edditedOffice.Name);
+                this.Data.SaveChanges();
 
-            return RedirectToAction("ListOffices");
+                TempData["Success"] = String.Format("Office {0} updated successfully!", editedOffice.Name);
+                return RedirectToAction("ListOffices");
+            }
+            else
+            {
+                editedOffice.ImagePath = officeToEdit.ImagePath;
+                return View(editedOffice);
+            }
         }
 
         [HttpGet]
         public ActionResult DeletePage(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var selectedOffice = this.Data.Offices.All().Select(AdminOfficeViewModel.FromOffice).FirstOrDefault(t => t.Id == id);
-
-            if (selectedOffice == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(selectedOffice);
+            return this.GetSelectedOffice(id);
         }
 
         [HttpPost, ActionName("DeletePage")]
         [ValidateAntiForgeryToken]
         public ActionResult DeletePagePost(string id)
         {
-            var officeToBeDeleted = this.Data.Offices.All().FirstOrDefault(t => t.Id.ToString() == id);
+            var officeToBeDeleted = this.Data.Offices.GetById(new Guid(id));
 
-            foreach (var payment in officeToBeDeleted.Payments)
-            {
-                this.Data.Payment.Delete(payment);
-            }
 
             this.Data.Offices.Delete(officeToBeDeleted);
             this.Data.SaveChanges();
@@ -192,5 +180,6 @@
 
             return RedirectToAction("ListOffices");
         }
+
     }
 }
