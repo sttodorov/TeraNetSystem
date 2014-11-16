@@ -7,6 +7,7 @@ using TeraNetSystem.Data;
 
 namespace TeraNetSystem.Web.Controllers
 {
+    [ValidateInput(false)]
     public class BaseController : Controller
     {
         private ITeraNetData data;

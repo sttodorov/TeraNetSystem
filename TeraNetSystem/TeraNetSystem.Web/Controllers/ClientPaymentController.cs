@@ -12,6 +12,7 @@ using System.Net;
 
 namespace TeraNetSystem.Web.Controllers
 {
+    [Authorize]
     public class ClientPaymentController : BaseController
     {
         private const int PageSize = 5;
