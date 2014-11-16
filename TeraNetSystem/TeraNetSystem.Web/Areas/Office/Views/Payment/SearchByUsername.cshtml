@@ -1,0 +1,21 @@
+﻿@model  IEnumerable<TeraNetSystem.Web.Areas.Office.Models.SimpleUserViewModel>
+
+<div class="anumated fadeInDown border-box lateral-padding" style="position:absolute;">
+    @foreach (var user in Model)
+    {
+            <div class="row">
+                @Html.LabelFor(m => user.UserName)
+                @Html.DisplayFor(m => user.UserName)
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(m => user.FullName)
+                @Html.DisplayFor(m => user.FullName)
+            </div>
+            <a class="button button-rounded button-flat-primary" href="@Url.Action("CreatePayment", "Payment", new { id = user.Id})">
+                <i class="fa fa-money">
+                    Pay
+                </i>
+            </a>
+    }
+</div>

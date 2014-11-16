@@ -18,6 +18,20 @@ namespace TeraNetSystem.Web.Controllers
         {
         }
 
+        [OutputCache(Duration= 60*60*24)]
+        private List<SelectListItem> TownsList()
+        {
+            var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice);
+            var selectedList = new List<SelectListItem>();
+
+            foreach (var item in towns)
+            {
+                selectedList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+
+            return selectedList;
+        }
+
         [HttpGet]
         public ActionResult All()
         {
@@ -29,18 +43,11 @@ namespace TeraNetSystem.Web.Controllers
         [HttpGet]
         public ActionResult Request(int? id)
         {
-            var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice).ToList();
-
             var serviceId = id.GetValueOrDefault(1);
 
-            var selectedList = new List<SelectListItem>();
+            var towns = this.TownsList();
 
-            foreach (var item in towns)
-            {
-                selectedList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
-            }
-
-            var createModel = new ServiceRequestModel() { Towns = selectedList, SubscriptionId = serviceId };
+            var createModel = new ServiceRequestModel() { Towns = towns, SubscriptionId = serviceId };
             return View(createModel);
         }
 
@@ -48,7 +55,7 @@ namespace TeraNetSystem.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Request(ServiceRequestModel request)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var createdRequest = new Request()
@@ -65,22 +72,14 @@ namespace TeraNetSystem.Web.Controllers
                 this.Data.SaveChanges();
 
                 TempData["Success"] = String.Format("Request for {0} subscription plan has been successfully send! We will call you in few days!",
-                                                    this.Data.Subscriptions.All().FirstOrDefault(s=>s.Id==createdRequest.SubscriptionId).SubscriptionName);                
+                                                    this.Data.Subscriptions.All().FirstOrDefault(s => s.Id == createdRequest.SubscriptionId).SubscriptionName);
             }
             else
             {
-                var towns = this.Data.Towns.All().Select(TownCreateModel.FromOffice).ToList();
+                var towns = this.TownsList();
 
-                var selectedList = new List<SelectListItem>();
-
-                foreach (var item in towns)
-                {
-                    selectedList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
-                }
-                request.Towns = selectedList;
+                request.Towns = towns;
                 request.RequstCaptcha = string.Empty;
-
-                TempData["Error"] = "Wrong validation code! Please enter code again!";
 
                 return View(request);
             }

@@ -191,6 +191,7 @@
     <Compile Include="Areas\Office\Controllers\TaskController.cs" />
     <Compile Include="Areas\Administration\Models\OfficeSubscriptionViewModel.cs" />
     <Compile Include="Areas\Office\Models\PaymentSearchModel.cs" />
+    <Compile Include="Areas\Office\Models\SimpleUserViewModel.cs" />
     <Compile Include="Areas\Office\Models\UserSearchModel.cs" />
     <Compile Include="Areas\Office\Models\RequestViewModel.cs" />
     <Compile Include="Areas\Office\Models\TaskViewModel.cs" />
@@ -270,6 +271,8 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mixitup.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\PagesJs\GenerateReceipt.js" />
     <Content Include="Content\js\page_charts.js" />
     <Content Include="Content\js\portfolio.js" />
@@ -359,10 +362,10 @@
     <Content Include="Areas\Office\Views\Payment\CreatePayment.cshtml" />
     <Content Include="Areas\Office\Views\Payment\ListPayments.cshtml" />
     <Content Include="Areas\Office\Views\Shared\_SearchPaymentPartial.cshtml" />
-    <Content Include="Areas\Office\Views\Payment\Detailsaa.cshtml" />
     <Content Include="Areas\Administration\Views\AdminNews\ListNews.cshtml" />
     <Content Include="Areas\Administration\Views\AdminNews\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\AdminNews\Create.cshtml" />
+    <Content Include="Areas\Office\Views\Payment\SearchByUsername.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -414,11 +417,10 @@
     <Content Include="Views\Home\TermsOfUse.cshtml" />
     <Content Include="Views\Home\Careers.cshtml" />
     <Content Include="Views\Shared\NewsDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringNoAutocomplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Office\Views\Network\" />
-    <Folder Include="Areas\Office\Views\Office\" />
     <Folder Include="Files\news\" />
     <Folder Include="Files\offices\" />
   </ItemGroup>

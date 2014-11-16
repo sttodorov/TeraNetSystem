@@ -22,7 +22,10 @@
         @Html.EditorFor(m => m.Address)
     </span>
     <span class="col-lg-3">
+        @Ajax.ActionLink("ajaxActionLink", "SearchByUsername", "Payment", new { username = string.Empty }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "users-result", InsertionMode = InsertionMode.Replace }, new { id = "AjaxActionLink", @class="hide"})
         @Html.EditorFor(m => m.UserName)
+        <div id="users-result" class="hide">
+        </div>
     </span>
     <span class="col-lg-3">
         @Html.EditorFor(m => m.FullName)

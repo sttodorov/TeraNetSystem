@@ -7,7 +7,34 @@
     <h3 class="margin-top">Search user: </h3>
     @using (Html.BeginForm("ListUsers", "Payment", null, FormMethod.Get, new { @class = "form-horizontal" }))
     {
-        @Html.Partial("_SearchPartial", new TeraNetSystem.Web.Areas.Office.Models.UserSearchModel())
+        @Html.Partial("_SearchPartial", (TeraNetSystem.Web.Areas.Office.Models.UserSearchModel)TempData["Search"])
     }
     @Html.Partial("_ListUsersPartial", Model)
 </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery-unobtrusive-ajax")
+    <script>
+        $("#UserName").on("keyup", function () {
+            var $usernameTextField = this;
+            if ($usernameTextField.value.length > 2)
+            {
+                $("#users-result").removeClass("hide");
+                console.log("The Form was submitted!");
+                $(function () {
+                    setTimeout(function () {
+                        //var href = $('#AjaxActionLink').attr("href") + this.value;
+                        var href = "/Office/Payment/SearchByUsername?username=" + $usernameTextField.value;
+                        console.log(href);
+                        $('#AjaxActionLink').attr("href", href)
+                        $('#AjaxActionLink').click();
+                    }, 1000);
+                });
+            }
+            else
+            {
+                $("#users-result").addClass("hide");
+            }
+        });
+    </script>
+}

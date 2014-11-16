@@ -9,9 +9,9 @@
     {
         @Html.Partial("_SearchPaymentPartial", (TeraNetSystem.Web.Areas.Office.Models.PaymentSearchModel)TempData["Search"])
     }
-    @if (@Model.Count() == 0)
+    @if (Model.Count() == 0)
     {
-        <h1 class="text-center text-info">No payments found!</h1>
+        <h1 class="text-center text-info admin-panel">No payments found!</h1>
     }
     else
     {

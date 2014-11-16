@@ -17,12 +17,16 @@ namespace TeraNetSystem.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 60 * 60 * 24)]
         public ActionResult AllOffices()
         {
-            var offices = this.Data.Offices.All().Select(OfficeViewModel.FromOffice);
-
+            var offices = this.GetAllOfiices();
             return View(offices);
+        }
+
+        [OutputCache(Duration = 60 * 60 * 24)]
+        private IQueryable<OfficeViewModel> GetAllOfiices()
+        {
+            return this.Data.Offices.All().Select(OfficeViewModel.FromOffice);
         }
     }
 }
