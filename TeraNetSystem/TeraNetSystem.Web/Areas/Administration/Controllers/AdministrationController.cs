@@ -13,7 +13,6 @@
         public AdministrationController(ITeraNetData data)
             :base(data)
         {
-
         }
 
     }
