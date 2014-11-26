@@ -48,7 +48,6 @@ namespace TeraNetSystem.Web.Controllers
             
             return View(currentUser);
         }
-
         
          //GET: /Manage/ChangePassword
         public ActionResult ChangePassword()

@@ -13,6 +13,7 @@
         {
             this.Users = new HashSet<ApplicationUser>();
             this.IsDeleted = false;
+            http:Console.WriteLine();
         }
 
         public int Id { get; set; }

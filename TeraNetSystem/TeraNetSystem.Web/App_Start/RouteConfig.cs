@@ -14,6 +14,13 @@ namespace TeraNetSystem.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "ManagePage",
+                url: "Manage",
+                defaults: new { controller = "Manage", action="Index"},
+                namespaces: new[] { "TeraNetSystem.Web.Controllers"}
+            );
+
+            routes.MapRoute(
                 name: "StaticPages",
                 url: "{action}",
                 defaults: new { controller = "Home"},

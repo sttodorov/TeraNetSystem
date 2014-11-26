@@ -17,7 +17,7 @@ namespace TeraNetSystem.Web.Areas.Office.Controllers
 
         }
 
-        [OutputCache(Duration = 60 * 60 * 2, VaryByParam = "townName")]
+        //[OutputCache(Duration = 60 * 60 * 2, VaryByParam = "townName")]
         protected List<SelectListItem> GetNetworkers(string townName)
         {
             var networkersForCurrentTaskTown = this.Data.Users.All().Where(u => u.Town.TownName == townName);
